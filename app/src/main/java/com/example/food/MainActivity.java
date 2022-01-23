@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
         frag(1);
     }
 
-    public void best(View view) {
+    public void food(View view) {
         frag(2);
     }
 
