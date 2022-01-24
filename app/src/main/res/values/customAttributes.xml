@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="customBgColor" format="reference" />
+    <attr name="themeColor1" format="reference"/>
+    <attr name="themeColor2" format="reference"/>
+    <attr name="themeColor3" format="reference"/>
+    <attr name="shadowColor" format="reference"/>
+
+</resources>
