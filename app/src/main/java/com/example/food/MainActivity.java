@@ -46,12 +46,13 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.addTab(tabLayout.newTab().setText("Popular"));
         tabLayout.addTab(tabLayout.newTab().setText("Burgers"));
         tabLayout.addTab(tabLayout.newTab().setText("Pizzas"));
-
+        tabLayout.addTab(tabLayout.newTab().setText("Beverages"));
+        tabLayout.addTab(tabLayout.newTab().setText("Desi"));
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         pager.setAdapter(adapter);
-        pager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
+//        pager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

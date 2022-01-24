@@ -22,8 +22,7 @@
         app:tabMinWidth="120dp"
         app:tabBackground="@color/green"
         app:tabIndicatorColor="@color/white"
-        app:tabTextColor="@color/white"
-        />
+        app:tabTextColor="@color/white"/>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
