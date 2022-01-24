@@ -81,6 +81,10 @@ public class ProductDetails extends AppCompatActivity  {
 //        Toast.makeText(ProductDetails.this, cart.size()+"", Toast.LENGTH_SHORT).show();
     }
 
+    public void closeWindow(View view) {
+        finish();
+    }
+
 
 //        popularProduct= (List<Product>) getIntent().getSerializableExtra("popularProducts");
 //        popularProduct= (List<Product>) i.getSerializableExtra("popularProducts");
