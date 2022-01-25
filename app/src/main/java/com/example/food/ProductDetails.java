@@ -3,15 +3,19 @@ package com.example.food;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ public class ProductDetails extends AppCompatActivity  {
     TextView name,price,itemValue,detail;
     ImageView img;
     int index;
+    BottomSheetBehavior bottomSheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +38,15 @@ public class ProductDetails extends AppCompatActivity  {
         price=findViewById(R.id.price);
         img=findViewById(R.id.img);
         itemValue=findViewById(R.id.itemValue);
-
+        
         Intent i = getIntent();
         int index=Integer.parseInt(i.getStringExtra("index"));
         this.index=index;
         setSizeOfScreen(index);
         price.setText(popularProduct.get(index).getPrice());
         name.setText(popularProduct.get(index).getName());
+
+
     }
 
     public void setSizeOfScreen(int index){
@@ -47,7 +54,7 @@ public class ProductDetails extends AppCompatActivity  {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width=dm.widthPixels;
         int height=dm.heightPixels;
-        getWindow().setLayout(width,(int)(height*0.8));
+        getWindow().setLayout(width,(int)(height*0.9));
 
         WindowManager.LayoutParams params=getWindow().getAttributes();
         params.gravity= Gravity.BOTTOM;
@@ -55,7 +62,7 @@ public class ProductDetails extends AppCompatActivity  {
         params.y=-20;
 
         getWindow().setAttributes(params);
-        Picasso.get().load(popularProduct.get(index).getImg()).resize(width,(int)(height*0.4)).into(img);
+        Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
     }
 
     public void increment(View view) {
