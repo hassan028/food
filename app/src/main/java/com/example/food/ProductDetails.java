@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class ProductDetails extends AppCompatActivity  {
         price=findViewById(R.id.price);
         img=findViewById(R.id.img);
         itemValue=findViewById(R.id.itemValue);
-        
+
         Intent i = getIntent();
         int index=Integer.parseInt(i.getStringExtra("index"));
         this.index=index;
@@ -62,6 +64,14 @@ public class ProductDetails extends AppCompatActivity  {
         params.y=-20;
 
         getWindow().setAttributes(params);
+
+//        Transformation transformation = new RoundedTransformationBuilder()
+//                .borderColor(Color.TRANSPARENT)
+//                .borderWidthDp(2)
+//                .cornerRadiusDp(20)
+//                .oval(false)
+//                .build();
+
         Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
     }
 

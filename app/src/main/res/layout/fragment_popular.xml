@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".PopularFragment">
     <ListView
-        android:dividerHeight="5dp"
+        android:dividerHeight="2dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@android:color/transparent"
+
         android:gravity="center"
         android:id="@+id/products"/>
 </FrameLayout>

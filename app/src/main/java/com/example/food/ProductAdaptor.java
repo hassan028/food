@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,8 +23,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.PicassoProvider;
+import com.squareup.picasso.Transformation;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +79,15 @@ public class ProductAdaptor extends BaseAdapter {
 
         title.setText(temp.getName());
         price.setText(temp.getPrice());
-        Picasso.get().load(temp.getImg()).resize(getScreenWidth(),600).into(img);
+
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.TRANSPARENT)
+                .borderWidthDp(2)
+                .cornerRadiusDp(15)
+                .oval(false)
+                .build();
+
+        Picasso.get().load(temp.getImg()).transform(transformation).resize(getScreenWidth(),600).into(img);
 
         return v;
     }
