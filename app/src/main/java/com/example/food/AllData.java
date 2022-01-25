@@ -8,13 +8,11 @@ import java.util.List;
 
 public class AllData extends Application {
     static List<Product> popularProduct;
+    static List<Cart> cart;
 
     public AllData() {
         popularProduct=new ArrayList<>();
-    }
-
-    public AllData(List<Product> popularProduct) {
-        this.popularProduct = popularProduct;
+        cart=new ArrayList<>();
     }
 
     public static List<Product> getPopularProduct() {
@@ -24,4 +22,13 @@ public class AllData extends Application {
     public static void setPopularProduct(List<Product> popularProduct) {
         AllData.popularProduct = popularProduct;
     }
+
+    public static List<Cart> getCart() {
+        return cart;
+    }
+
+    public static void setCart(List<Cart> cart) {
+        AllData.cart = cart;
+    }
+
 }
