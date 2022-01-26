@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.9">
+            <Button
+                android:id="@+id/btnIncrease"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/circle2"
+                android:layout_gravity="center"
+                android:text="+"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:onClick="increaseQuantity" />
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:layout_toRightOf="@id/btnIncrease"
+                android:layout_gravity="center"
+                android:textColor="?themeColor2"
+                android:textSize="25dp"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                />
+        <Button
+            android:id="@+id/btnDecrease"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/circle2"
+            android:layout_gravity="center"
+            android:text="−"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:onClick="increaseQuantity"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvQuantity"
+            android:textColor="@color/black"
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.4">
+            <TextView
+                android:id="@+id/tvMenuName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Zinger Burger"
+                android:layout_toRightOf="@id/btnDecrease"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.7">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs."
+                    android:textSize="25sp"
+                    android:layout_toLeftOf="@+id/tvMenuSubtotal"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    />
+
+                <TextView
+                    android:id="@+id/tvMenuSubtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="50"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+            </RelativeLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

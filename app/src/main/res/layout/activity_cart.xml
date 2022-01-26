@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="10"
+
+    >
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8.8"
+        android:orientation="vertical"
+        android:weightSum="10"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cart"
+                android:textStyle="bold"
+                android:textColor="?themeColor2"
+                android:textSize="40sp"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/list"
+            android:layout_weight="3"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs."
+                android:textSize="30sp"
+                android:layout_toLeftOf="@+id/tvSubtotal"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/tvSubtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="300"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Discount"
+                android:textSize="30sp"
+                android:layout_below="@+id/tvSubtotal"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs."
+                android:textSize="30sp"
+                android:layout_toLeftOf="@+id/tvDiscount"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/tvSubtotal"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/tvDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubtotal"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:text="50"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TotalBill"
+                android:textSize="30sp"
+                android:layout_below="@+id/tvDiscount"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs."
+                android:textSize="30sp"
+                android:layout_toLeftOf="@+id/tvTotalBill"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/tvDiscount"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                />
+            <TextView
+                android:id="@+id/tvTotalBill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="250"
+                android:textAlignment="textEnd"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvDiscount"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="?themeColor2"
+                android:padding="15dp"
+                android:text="Proceed to order" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"/>
+
+
+</LinearLayout>
