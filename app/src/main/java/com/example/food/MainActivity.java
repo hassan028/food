@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager pager;
     FragmentAdapter adapter;
+
+    FirebaseDatabase mDatabase;
+    DatabaseReference mRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,27 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        mDatabase = FirebaseDatabase.getInstance();
+        // mRef = mDatabase.getReference(); // Refrence of parent node
+        mRef = mDatabase.getReference("Menu"); // Refrence of chil node
+
+
+
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Toast.makeText(MainActivity.this, "Hello usman", Toast.LENGTH_SHORT).show();
+                for(DataSnapshot snap : snapshot.getChildren()) {
+                    Toast.makeText(MainActivity.this, snap.getKey(), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     /*public void popular(View view) {

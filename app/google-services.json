@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:669581712262:android:a7ea8cb18284996a9caa07",
+        "android_client_info": {
+          "package_name": "com.example.firebasefooddemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669581712262-s4ii0dmen3t49053bojhtnlpopee3cek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWgzIYGPeQAtc7lNWsg1cn5yD3m7XrBmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669581712262-s4ii0dmen3t49053bojhtnlpopee3cek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:669581712262:android:72e50e88d9f7e9859caa07",
         "android_client_info": {
           "package_name": "com.example.food"

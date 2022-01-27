@@ -33,9 +33,11 @@ import java.util.List;
 
 public class PopularFragment extends Fragment {
     ListView product;
+    FirebaseDatabase mDatabase;
     DatabaseReference menu;
     DatabaseReference category;
     DatabaseReference menuCategory;
+    DatabaseReference mRef;
 
     List<Product> Menu;
     List<Category> Category;
@@ -43,15 +45,36 @@ public class PopularFragment extends Fragment {
 
     Context c;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_popular, null);
         product=(ListView) root.findViewById(R.id.products);
 
+        mDatabase = FirebaseDatabase.getInstance();
+        menu = mDatabase.getReference("Category");
+
+        // mRef = mDatabase.getReference(); // Refrence of parent node
+        mRef = mDatabase.getReference("Menu"); // Refrence of chil node
+
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()) {
+                    Toast.makeText(getActivity(), snap.getKey(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 //        product.setNumColumns(2);
 //        popular = FirebaseDatabase.getInstance().getReference().child("Products").child("Paid");
-        menu = FirebaseDatabase.getInstance().getReference().child("Menu");
+//        menu = FirebaseDatabase.getInstance().getReference().child("Menu");
         category = FirebaseDatabase.getInstance().getReference().child("Category");
 //        menuCategory = FirebaseDatabase.getInstance().getReference().child("MenuCategory");
 
@@ -72,8 +95,8 @@ public class PopularFragment extends Fragment {
 
     public void getData(){
 
-        String name="ssnsn";
-        int price=100;
+        /*String name="ssnsn";
+        int price=100;`
         String detail="nsnnsnsms";
 
         Product p=new Product("Burgerhh","ndnn","Hello wold",0,10,32.01);
@@ -89,17 +112,25 @@ public class PopularFragment extends Fragment {
 
                 }
             }
-        });
+        });*/
 
-        menu.addValueEventListener(new ValueEventListener() {
+        menu.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    Product temp = snap.getValue(Product.class);
-                    Menu.add(temp);
-                    Toast.makeText(getActivity(), temp.getName(), Toast.LENGTH_SHORT).show();
+                if (!snapshot.hasChildren()) {
+                    // run some code
+                    Toast.makeText(getActivity(),"Child Exist", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(getActivity(), snapshot.hasChildren()+"", Toast.LENGTH_SHORT).show();
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Toast.makeText(getActivity(), snap.getKey(), Toast.LENGTH_SHORT).show();
+                    for(DataSnapshot snap2 : snap.getChildren()){
+                        Toast.makeText(getActivity(), snap2.getKey(), Toast.LENGTH_SHORT).show();
+                    }
+                  //  Product temp = snap.getValue(Product.class);
+                    //Menu.add(temp);
+                   // Toast.makeText(getActivity(), temp.getName(), Toast.LENGTH_SHORT).show();
+                }
+          /*      Toast.makeText(getActivity(), snapshot.hasChildren()+"", Toast.LENGTH_SHORT).show();
                 //Show data in BaseAdapter(LISTVIEW)
                 AllData allData=new AllData();
                 AllData.setMenu(Menu);
@@ -107,7 +138,7 @@ public class PopularFragment extends Fragment {
                 Toast.makeText(getActivity(), AllData.getMenu().size()+"", Toast.LENGTH_SHORT).show();
 
                 ProductAdaptor productAdaptor=new ProductAdaptor(AllData.getPopularProduct(),getActivity());
-                product.setAdapter(productAdaptor);
+                product.setAdapter(productAdaptor);*/
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

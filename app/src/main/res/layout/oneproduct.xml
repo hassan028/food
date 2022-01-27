@@ -78,7 +78,7 @@
             android:scaleType="fitXY"
             android:layout_marginRight="10dp"
             android:id="@+id/img"
-            android:src="@drawable/googleg_standard_color_18"
+
             />
     </LinearLayout>
 
