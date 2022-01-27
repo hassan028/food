@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -70,6 +71,25 @@ public class PopularFragment extends Fragment {
     }
 
     public void getData(){
+
+        String name="ssnsn";
+        int price=100;
+        String detail="nsnnsnsms";
+
+        Product p=new Product("Burgerhh","ndnn","Hello wold",0,10,32.01);
+
+        menu.child(name).setValue(p, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if(error == null){
+                    Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
 
         menu.addValueEventListener(new ValueEventListener() {
             @Override
