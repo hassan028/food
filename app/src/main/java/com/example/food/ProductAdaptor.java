@@ -78,7 +78,7 @@ public class ProductAdaptor extends BaseAdapter {
         ImageView img=v.findViewById(R.id.img);
 
         title.setText(temp.getName());
-        price.setText(temp.getPrice());
+        price.setText(temp.getPrice()+"");
 
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.TRANSPARENT)

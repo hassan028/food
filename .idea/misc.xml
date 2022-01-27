@@ -3,22 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/all_sides_rounded.xml" value="0.1375" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/circle.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/close.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/minus.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/rounded.xml" value="0.1375" />
+        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_cart.xml" value="0.18" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_product_details.xml" value="0.25" />
+        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_product_details.xml" value="0.22" />
+        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/cart_row.xml" value="0.25" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/fragment_best.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/fragment_popular.xml" value="0.19375" />
+        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/fragment_popular.xml" value="0.15" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/oneproduct.xml" value="0.22" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/circle.xml" value="0.18697916666666667" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/circle2.xml" value="0.176" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_cart.xml" value="0.2" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_main.xml" value="0.17083333333333334" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_product_details.xml" value="0.11458333333333333" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/cart_row.xml" value="0.2" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/fragment_best.xml" value="0.17962962962962964" />
-        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/oneproduct.xml" value="0.17962962962962964" />
       </map>
     </option>
   </component>

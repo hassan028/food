@@ -32,8 +32,14 @@ import java.util.List;
 
 public class PopularFragment extends Fragment {
     ListView product;
-    DatabaseReference popular;
-    List<Product> popularProducts;
+    DatabaseReference menu;
+    DatabaseReference category;
+    DatabaseReference menuCategory;
+
+    List<Product> Menu;
+    List<Category> Category;
+    List<MenuCategory> MenuCategory;
+
     Context c;
 
     @Override
@@ -43,16 +49,17 @@ public class PopularFragment extends Fragment {
         product=(ListView) root.findViewById(R.id.products);
 
 //        product.setNumColumns(2);
+//        popular = FirebaseDatabase.getInstance().getReference().child("Products").child("Paid");
+        menu = FirebaseDatabase.getInstance().getReference().child("Menu");
+        category = FirebaseDatabase.getInstance().getReference().child("Category");
+//        menuCategory = FirebaseDatabase.getInstance().getReference().child("MenuCategory");
 
-        popular = FirebaseDatabase.getInstance().getReference().child("Products").child("Paid");
-        popularProducts= new ArrayList<>();
+        Menu= new ArrayList<>();
 
-        String prodIt = popular.push().getKey();
         getData();
 
         product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
                 Intent intent=new Intent(getActivity(),ProductDetails.class);
                 intent.putExtra("index",position+"");
@@ -63,24 +70,25 @@ public class PopularFragment extends Fragment {
     }
 
     public void getData(){
-        popular.addValueEventListener(new ValueEventListener() {
 
+        menu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap : snapshot.getChildren()){
                     Product temp = snap.getValue(Product.class);
-                    popularProducts.add(temp);
+                    Menu.add(temp);
+                    Toast.makeText(getActivity(), temp.getName(), Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(getActivity(), snapshot.hasChildren()+"", Toast.LENGTH_SHORT).show();
                 //Show data in BaseAdapter(LISTVIEW)
                 AllData allData=new AllData();
+                AllData.setMenu(Menu);
+                AllData.setPopularProduct();
+                Toast.makeText(getActivity(), AllData.getMenu().size()+"", Toast.LENGTH_SHORT).show();
 
-                AllData.setPopularProduct(popularProducts);
-
-//                allData.setPopularProduct(popularProducts);
-                ProductAdaptor productAdaptor=new ProductAdaptor(popularProducts,getActivity());
+                ProductAdaptor productAdaptor=new ProductAdaptor(AllData.getPopularProduct(),getActivity());
                 product.setAdapter(productAdaptor);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();

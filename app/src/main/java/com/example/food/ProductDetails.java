@@ -45,7 +45,7 @@ public class ProductDetails extends AppCompatActivity  {
         int index=Integer.parseInt(i.getStringExtra("index"));
         this.index=index;
         setSizeOfScreen(index);
-        price.setText(popularProduct.get(index).getPrice());
+        price.setText(popularProduct.get(index).getPrice()+"");
         name.setText(popularProduct.get(index).getName());
 
 

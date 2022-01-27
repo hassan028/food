@@ -4,41 +4,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Product {
-    String name,id,price,userId,img;
-
-    public Product() {
-    }
+    String Name,img,Details;
+    int Id,OrderCount;
+    double Price;
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+        Name = name;
     }
 
     public String getImg() {
@@ -49,11 +24,98 @@ public class Product {
         this.img = img;
     }
 
-    public Product(String name, String id, String price, String userId, String img) {
-        this.name = name;
-        this.id = id;
-        this.price = price;
-        this.userId = userId;
-        this.img = img;
+    public String getDetails() {
+        return Details;
     }
+
+    public void setDetails(String details) {
+        Details = details;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getOrderCount() {
+        return OrderCount;
+    }
+
+    public void setOrderCount(int orderCount) {
+        OrderCount = orderCount;
+    }
+
+    public double getPrice() {
+        return Price;
+    }
+
+    public void setPrice(double price) {
+        Price = price;
+    }
+
+    public Product() {
+    }
+
+    public Product(String name, String img, String details, int id, int orderCount, double price) {
+        Name = name;
+        this.img = img;
+        Details = details;
+        Id = id;
+        OrderCount = orderCount;
+        Price = price;
+    }
+
+    //    public Product() {
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
+//
+//    public String getPrice() {
+//        return price;
+//    }
+//
+//    public void setPrice(String price) {
+//        this.price = price;
+//    }
+//
+//    public String getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(String userId) {
+//        this.userId = userId;
+//    }
+//
+//    public String getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(String img) {
+//        this.img = img;
+//    }
+//
+//    public Product(String name, String id, String price, String userId, String img) {
+//        this.name = name;
+//        this.id = id;
+//        this.price = price;
+//        this.userId = userId;
+//        this.img = img;
+//    }
 }
