@@ -1,27 +1,30 @@
 package com.example.food;
 
 public class Category {
-    int id;
-    String name;
+    long Id;
+    String Name;
 
-    public int getId() {
-        return id;
+    public long getId() {
+        return Id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(long id) {
+        Id = id;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
-    public Category(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Category() {
+    }
+
+    public Category(long id, String name) {
+        Id = id;
+        Name = name;
     }
 }

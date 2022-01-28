@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 public class PopularFragment extends Fragment {
     ListView product;
@@ -37,11 +38,12 @@ public class PopularFragment extends Fragment {
     DatabaseReference menu;
     DatabaseReference category;
     DatabaseReference menuCategory;
-    DatabaseReference mRef;
+//    DatabaseReference mRef;
 
     List<Product> Menu;
     List<Category> Category;
     List<MenuCategory> MenuCategory;
+    List<Product> popular;
 
     Context c;
 
@@ -51,35 +53,39 @@ public class PopularFragment extends Fragment {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_popular, null);
         product=(ListView) root.findViewById(R.id.products);
-
-        mDatabase = FirebaseDatabase.getInstance();
-        menu = mDatabase.getReference("Category");
+//
+//        mDatabase = FirebaseDatabase.getInstance();
+//        menu = mDatabase.getReference("Category");
 
         // mRef = mDatabase.getReference(); // Refrence of parent node
-        mRef = mDatabase.getReference("Menu"); // Refrence of chil node
-
-        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.getChildren()) {
-                    Toast.makeText(getActivity(), snap.getKey(), Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//        mRef = mDatabase.getReference("Menu"); // Refrence of chil node
+//
+//        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot snap : snapshot.getChildren()) {
+//                    Toast.makeText(getActivity(), snap.getKey(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
 //        product.setNumColumns(2);
 //        popular = FirebaseDatabase.getInstance().getReference().child("Products").child("Paid");
-//        menu = FirebaseDatabase.getInstance().getReference().child("Menu");
+
+        menu = FirebaseDatabase.getInstance().getReference().child("Menu");
         category = FirebaseDatabase.getInstance().getReference().child("Category");
-//        menuCategory = FirebaseDatabase.getInstance().getReference().child("MenuCategory");
+        menuCategory = FirebaseDatabase.getInstance().getReference().child("MenuCategory");
 
         Menu= new ArrayList<>();
-
+        Category=new ArrayList<>();
+        MenuCategory=new ArrayList<>();
+        popular=new ArrayList<>();
+        AllData allData=new AllData();
         getData();
 
         product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -94,6 +100,83 @@ public class PopularFragment extends Fragment {
     }
 
     public void getData(){
+///////////////////////////////////////////////
+        category.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Category temp = snap.getValue(Category.class);
+                    Category.add(temp);
+                }
+                AllData.setCategory(Category);
+                Toast.makeText(getActivity(), "Cat "+Category.size()+"", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+/////////////////////////////////////////////////
+        menuCategory.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    MenuCategory temp = snap.getValue(MenuCategory.class);
+                    MenuCategory.add(temp);
+                }
+
+                Toast.makeText(getActivity(), "MENUCAT = "+MenuCategory.size()+"", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        menu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Product temp = snap.getValue(Product.class);
+                    Menu.add(temp);
+                }
+                AllData.setMenu(Menu);
+//                Toast.makeText(getActivity(), "Menu size = "+Menu.size()+"", Toast.LENGTH_SHORT).show();
+//
+//                long menuId;
+//
+//                for(int j=0;j<MenuCategory.size();j++){
+//                    Toast.makeText(getActivity(), "For", Toast.LENGTH_SHORT).show();
+//                    if(((int)(MenuCategory.get(j).getCatId()))==1){
+//                        menuId=MenuCategory.get(j).getMenuId();
+//                        popular.add(Menu.get((int) menuId));
+//                    }
+//                }
+//
+//
+//                Toast.makeText(getActivity(), "jhjjh", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), popular.size()+"", Toast.LENGTH_SHORT).show();
+
+                ProductAdaptor productAdaptor=new ProductAdaptor(Menu,getActivity());
+                product.setAdapter(productAdaptor);
+
+
+//                List<Product> a=new ArrayList<>();
+//
+//                List<Product> me=AllData.getMenu();
+//                Toast.makeText(getActivity(), "Menu size = "+me.size()+"", Toast.LENGTH_SHORT).show();
+//
+//                List<Category> ca=AllData.getCategory();
+//                Toast.makeText(getActivity(), "Cat = "+ca.size()+"", Toast.LENGTH_SHORT).show();
+
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         /*String name="ssnsn";
         int price=100;`
@@ -114,37 +197,37 @@ public class PopularFragment extends Fragment {
             }
         });*/
 
-        menu.addListenerForSingleValueEvent(new ValueEventListener(){
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.hasChildren()) {
-                    // run some code
-                    Toast.makeText(getActivity(),"Child Exist", Toast.LENGTH_SHORT).show();
-                }
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    Toast.makeText(getActivity(), snap.getKey(), Toast.LENGTH_SHORT).show();
-                    for(DataSnapshot snap2 : snap.getChildren()){
-                        Toast.makeText(getActivity(), snap2.getKey(), Toast.LENGTH_SHORT).show();
-                    }
-                  //  Product temp = snap.getValue(Product.class);
-                    //Menu.add(temp);
-                   // Toast.makeText(getActivity(), temp.getName(), Toast.LENGTH_SHORT).show();
-                }
-          /*      Toast.makeText(getActivity(), snapshot.hasChildren()+"", Toast.LENGTH_SHORT).show();
-                //Show data in BaseAdapter(LISTVIEW)
-                AllData allData=new AllData();
-                AllData.setMenu(Menu);
-                AllData.setPopularProduct();
-                Toast.makeText(getActivity(), AllData.getMenu().size()+"", Toast.LENGTH_SHORT).show();
-
-                ProductAdaptor productAdaptor=new ProductAdaptor(AllData.getPopularProduct(),getActivity());
-                product.setAdapter(productAdaptor);*/
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        menu.addListenerForSingleValueEvent(new ValueEventListener(){
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (!snapshot.hasChildren()) {
+//                    // run some code
+//                    Toast.makeText(getActivity(),"Child Exist", Toast.LENGTH_SHORT).show();
+//                }
+//                for(DataSnapshot snap : snapshot.getChildren()){
+//                    Toast.makeText(getActivity(), snap.getKey(), Toast.LENGTH_SHORT).show();
+//                    for(DataSnapshot snap2 : snap.getChildren()){
+//                        Toast.makeText(getActivity(), snap2.getKey(), Toast.LENGTH_SHORT).show();
+//                    }
+//                  //  Product temp = snap.getValue(Product.class);
+//                    //Menu.add(temp);
+//                   // Toast.makeText(getActivity(), temp.getName(), Toast.LENGTH_SHORT).show();
+//                }
+//          /*      Toast.makeText(getActivity(), snapshot.hasChildren()+"", Toast.LENGTH_SHORT).show();
+//                //Show data in BaseAdapter(LISTVIEW)
+//                AllData allData=new AllData();
+//                AllData.setMenu(Menu);
+//                AllData.setPopularProduct();
+//                Toast.makeText(getActivity(), AllData.getMenu().size()+"", Toast.LENGTH_SHORT).show();
+//
+//                ProductAdaptor productAdaptor=new ProductAdaptor(AllData.getPopularProduct(),getActivity());
+//                product.setAdapter(productAdaptor);*/
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }
 

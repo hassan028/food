@@ -1,6 +1,9 @@
 package com.example.food;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,14 +24,7 @@ public class AllData extends Application {
         menu=new ArrayList<>();
     }
 
-    //menu category setters and getters
-    public static List<MenuCategory> getMenuCategory() {
-        return menuCategory;
-    }
 
-    public static void setMenuCategory(List<MenuCategory> menuCategory) {
-        AllData.menuCategory = menuCategory;
-    }
 
     //category getters and setters
     public static List<Category> getCategory() {
@@ -65,14 +61,24 @@ public class AllData extends Application {
         AllData.menu = menu;
     }
 
+    //menu category setters and getters
+    public static List<MenuCategory> getMenuCategory() {
+        return menuCategory;
+    }
+
+    public static void setMenuCategory(List<MenuCategory> menuCategory) {
+        AllData.menuCategory = menuCategory;
+    }
+
+
     public static void setPopularProduct(){
-        int menuId;
+        long menuId;
+//        long id=1;
         for(int j=0;j<menuCategory.size();j++){
-            if(menuCategory.get(j).getCartId()==1){
+            if(((int)(menuCategory.get(j).getCatId()))==1){
                 menuId=menuCategory.get(j).getMenuId();
-                popularProduct.add(menu.get(menuId));
+                popularProduct.add(menu.get((int) menuId));
             }
         }
     }
-
 }

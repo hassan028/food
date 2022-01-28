@@ -1,29 +1,29 @@
 package com.example.food;
 
 public class MenuCategory {
-    int catId,menuId;
+    long CatId,MenuId;
 
-    public int getCartId() {
-        return catId;
+    public long getCatId() {
+        return CatId;
     }
 
-    public void setCartId(int catId) {
-        this.catId = catId;
+    public void setCatId(long catId) {
+        CatId = catId;
     }
 
-    public int getMenuId() {
-        return menuId;
+    public long getMenuId() {
+        return MenuId;
     }
 
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
+    public void setMenuId(long menuId) {
+        MenuId = menuId;
     }
 
     public MenuCategory() {
     }
 
-    public MenuCategory(int catId, int menuId) {
-        this.catId = catId;
-        this.menuId = menuId;
+    public MenuCategory(long catId, long menuId) {
+        CatId = catId;
+        MenuId = menuId;
     }
 }
