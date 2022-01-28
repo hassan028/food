@@ -38,12 +38,14 @@ public class PopularFragment extends Fragment {
     DatabaseReference menu;
     DatabaseReference category;
     DatabaseReference menuCategory;
+    DatabaseReference order;
 //    DatabaseReference mRef;
 
     List<Product> Menu;
     List<Category> Category;
     List<MenuCategory> MenuCategory;
     List<Product> popular;
+    List<Order> Order;
 
     Context c;
 
@@ -79,13 +81,16 @@ public class PopularFragment extends Fragment {
         menu = FirebaseDatabase.getInstance().getReference().child("Menu");
         category = FirebaseDatabase.getInstance().getReference().child("Category");
         menuCategory = FirebaseDatabase.getInstance().getReference().child("MenuCategory");
+        order = FirebaseDatabase.getInstance().getReference().child("Order");
 
         Menu= new ArrayList<>();
         Category=new ArrayList<>();
         MenuCategory=new ArrayList<>();
         popular=new ArrayList<>();
+        Order=new ArrayList<>();
+
         AllData allData=new AllData();
-        getMenuCategory();
+        getOrder();
 
         product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -107,6 +112,7 @@ public class PopularFragment extends Fragment {
 
                 }
                 AllData.setMenu(Menu);
+                getCategory();
                 AllData.setPopularProduct();
 
 //                Toast.makeText(getActivity(), "Popular size "+AllData.getPopularProduct().size()+"", Toast.LENGTH_SHORT).show();
@@ -132,14 +138,15 @@ public class PopularFragment extends Fragment {
                     Category.add(temp);
                 }
                 AllData.setCategory(Category);
+                getOrder();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
     public void getMenuCategory(){
         menuCategory.addValueEventListener(new ValueEventListener() {
             @Override
@@ -158,7 +165,22 @@ public class PopularFragment extends Fragment {
         });
     }
 
-    public void getData(){
+    public void getOrder(){
+        order.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Order temp = snap.getValue(Order.class);
+                    Order.add(temp);
+                    Toast.makeText(getActivity(), temp.getCurrentDate(), Toast.LENGTH_SHORT).show();
+                }
+                AllData.setOrder(Order);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
 //////////////////////////////////////////////////////////

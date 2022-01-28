@@ -12,6 +12,7 @@ import java.util.List;
 public class AllData extends Application {
     static List<Product> popularProduct;
     static List<Cart> cart;
+    static List<Order> order;
     static List<Category> category;
     static List<MenuCategory> menuCategory;
     static List<Product> menu;
@@ -22,6 +23,7 @@ public class AllData extends Application {
         category=new ArrayList<>();
         menuCategory=new ArrayList<>();
         menu=new ArrayList<>();
+        order=new ArrayList<>();
     }
 
     //category getters and setters
@@ -83,5 +85,13 @@ public class AllData extends Application {
                 }
             }
         }
+    }
+//Order List Getters and Setters
+    public static List<Order> getOrder() {
+        return order;
+    }
+
+    public static void setOrder(List<Order> order) {
+        AllData.order = order;
     }
 }

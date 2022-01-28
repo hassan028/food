@@ -40,13 +40,15 @@ public class ProductDetails extends AppCompatActivity  {
         price=findViewById(R.id.price);
         img=findViewById(R.id.img);
         itemValue=findViewById(R.id.itemValue);
+        detail=findViewById(R.id.detail);
 
         Intent i = getIntent();
         int index=Integer.parseInt(i.getStringExtra("index"));
         this.index=index;
         setSizeOfScreen(index);
-        price.setText(popularProduct.get(index).getPrice()+"");
+        price.setText("Rs. "+popularProduct.get(index).getPrice()+"");
         name.setText(popularProduct.get(index).getName());
+        detail.setText(popularProduct.get(index).getDetails());
 
 
     }
