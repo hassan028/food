@@ -69,13 +69,18 @@ public class AllData extends Application {
     }
 
 
-    public static void setPopularProduct(){
+    public static void setPopularProduct() {
         long menuId;
-//        long id=1;
-        for(int j=0;j<menuCategory.size();j++){
-            if(((int)(menuCategory.get(j).getCatId()))==1){
-                menuId=menuCategory.get(j).getMenuId();
-                popularProduct.add(menu.get((int) menuId));
+
+        for (int j = 0; j < menuCategory.size(); j++) {
+            if (menuCategory.get(j).getCatId() == 1) {
+                menuId = menuCategory.get(j).getMenuId();
+                for (int i = 0; i < menu.size(); i++) {
+                    if ((int)(menu.get(i).getId()) == menuId) {
+                        AllData.popularProduct.add(menu.get(i));
+                        break;
+                    }
+                }
             }
         }
     }

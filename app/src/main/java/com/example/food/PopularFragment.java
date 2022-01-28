@@ -47,7 +47,6 @@ public class PopularFragment extends Fragment {
 
     Context c;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
@@ -86,11 +85,10 @@ public class PopularFragment extends Fragment {
         MenuCategory=new ArrayList<>();
         popular=new ArrayList<>();
         AllData allData=new AllData();
-        getData();
+        getMenuCategory();
 
         product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Intent intent=new Intent(getActivity(),ProductDetails.class);
                 intent.putExtra("index",position+"");
                 startActivity(intent);
@@ -99,8 +97,33 @@ public class PopularFragment extends Fragment {
         return root;
     }
 
-    public void getData(){
-///////////////////////////////////////////////
+    public void getMenu(){
+        menu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Product temp = snap.getValue(Product.class);
+                    Menu.add(temp);
+
+                }
+                AllData.setMenu(Menu);
+                AllData.setPopularProduct();
+
+//                Toast.makeText(getActivity(), "Popular size "+AllData.getPopularProduct().size()+"", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Menu size "+AllData.getMenu().size()+"", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "MenuCat size "+AllData.getMenuCategory().size()+"", Toast.LENGTH_SHORT).show();
+
+                ProductAdaptor productAdaptor=new ProductAdaptor(AllData.getPopularProduct(),getActivity());
+                product.setAdapter(productAdaptor);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    public void getCategory(){
         category.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -109,14 +132,15 @@ public class PopularFragment extends Fragment {
                     Category.add(temp);
                 }
                 AllData.setCategory(Category);
-                Toast.makeText(getActivity(), "Cat "+Category.size()+"", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-/////////////////////////////////////////////////
+
+    }
+    public void getMenuCategory(){
         menuCategory.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -124,60 +148,22 @@ public class PopularFragment extends Fragment {
                     MenuCategory temp = snap.getValue(MenuCategory.class);
                     MenuCategory.add(temp);
                 }
-
-                Toast.makeText(getActivity(), "MENUCAT = "+MenuCategory.size()+"", Toast.LENGTH_SHORT).show();
+                AllData.setMenuCategory(MenuCategory);
+                getMenu();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        menu.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    Product temp = snap.getValue(Product.class);
-                    Menu.add(temp);
-                }
-                AllData.setMenu(Menu);
-//                Toast.makeText(getActivity(), "Menu size = "+Menu.size()+"", Toast.LENGTH_SHORT).show();
-//
-//                long menuId;
-//
-//                for(int j=0;j<MenuCategory.size();j++){
-//                    Toast.makeText(getActivity(), "For", Toast.LENGTH_SHORT).show();
-//                    if(((int)(MenuCategory.get(j).getCatId()))==1){
-//                        menuId=MenuCategory.get(j).getMenuId();
-//                        popular.add(Menu.get((int) menuId));
-//                    }
-//                }
-//
-//
-//                Toast.makeText(getActivity(), "jhjjh", Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getActivity(), popular.size()+"", Toast.LENGTH_SHORT).show();
-
-                ProductAdaptor productAdaptor=new ProductAdaptor(Menu,getActivity());
-                product.setAdapter(productAdaptor);
-
-
-//                List<Product> a=new ArrayList<>();
-//
-//                List<Product> me=AllData.getMenu();
-//                Toast.makeText(getActivity(), "Menu size = "+me.size()+"", Toast.LENGTH_SHORT).show();
-//
-//                List<Category> ca=AllData.getCategory();
-//                Toast.makeText(getActivity(), "Cat = "+ca.size()+"", Toast.LENGTH_SHORT).show();
-
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        /*String name="ssnsn";
+    public void getData(){
+    }
+}
+//////////////////////////////////////////////////////////
+//usman tera data ha ya
+       /*String name="ssnsn";
         int price=100;`
         String detail="nsnnsnsms";
 
@@ -227,8 +213,16 @@ public class PopularFragment extends Fragment {
 //                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
 //            }
 //        });
-    }
-}
+
+
+
+
+//////////////////////////////////////
+
+
+
+
+
 
 //              intent.putExtra("popularProducts", (Parcelable) popularProducts);
 //                Bundle b = new Bundle();
