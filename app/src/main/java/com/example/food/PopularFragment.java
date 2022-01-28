@@ -239,12 +239,6 @@ public class PopularFragment extends Fragment {
 
 
 //////////////////////////////////////
-
-
-
-
-
-
 //              intent.putExtra("popularProducts", (Parcelable) popularProducts);
 //                Bundle b = new Bundle();
 //                b.putSerializable("popularProducts", (Serializable) popularProducts);
