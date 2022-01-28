@@ -90,7 +90,7 @@ public class PopularFragment extends Fragment {
         Order=new ArrayList<>();
 
         AllData allData=new AllData();
-        getOrder();
+        getMenuCategory();
 
         product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -169,11 +169,10 @@ public class PopularFragment extends Fragment {
         order.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    Order temp = snap.getValue(Order.class);
-                    Order.add(temp);
-                    Toast.makeText(getActivity(), temp.getCurrentDate(), Toast.LENGTH_SHORT).show();
-                }
+
+                Order temp = snapshot.getValue(Order.class);
+                Order.add(temp);
+//                Toast.makeText(getActivity(), temp.getCurrentDate()+"", Toast.LENGTH_SHORT).show();
                 AllData.setOrder(Order);
             }
             @Override
