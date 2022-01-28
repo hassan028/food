@@ -170,7 +170,6 @@ public class PopularFragment extends Fragment {
 //                Toast.makeText(getActivity(), "Cat = "+ca.size()+"", Toast.LENGTH_SHORT).show();
 
 
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

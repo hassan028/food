@@ -24,8 +24,6 @@ public class AllData extends Application {
         menu=new ArrayList<>();
     }
 
-
-
     //category getters and setters
     public static List<Category> getCategory() {
         return category;
