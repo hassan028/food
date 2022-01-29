@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity{
         loadFirebaseToList("Menu");
         loadFirebaseToList("Category");
         loadFirebaseToList("MenuCategory");
+        loadFirebaseToList("Order");
     }
     public void loadFirebaseToList(String table){
 
@@ -106,19 +108,22 @@ public class MainActivity extends AppCompatActivity{
         foodDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snap : snapshot.getChildren()) {
-                    if(table.equals("Menu")) {
-                        Product tempProduct = snap.getValue(Product.class);
-                        AllData.menuList.add(tempProduct);
-                    }
-                    else if(table.equals("Category")){
-                        Category tempCategory = snap.getValue(Category.class);
-                        AllData.categoryList.add(tempCategory);
+                if(table.equals("Order")){
+                    Order tempOrder=snapshot.getValue(Order.class);
+                    AllData.orderList.add(tempOrder);
+                }else {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        if (table.equals("Menu")) {
+                            Product tempProduct = snap.getValue(Product.class);
+                            AllData.menuList.add(tempProduct);
+                        } else if (table.equals("Category")) {
+                            Category tempCategory = snap.getValue(Category.class);
+                            AllData.categoryList.add(tempCategory);
 
-                    }
-                    else if(table.equals("MenuCategory")){
-                        MenuCategory tempMenuCategory = snap.getValue(MenuCategory.class);
-                        AllData.menuCategoryList.add(tempMenuCategory);
+                        } else if (table.equals("MenuCategory")) {
+                            MenuCategory tempMenuCategory = snap.getValue(MenuCategory.class);
+                            AllData.menuCategoryList.add(tempMenuCategory);
+                        }
                     }
                 }
             }
@@ -135,6 +140,13 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(MainActivity.this,SearchActivity.class);
         startActivity(intent);
 
+    }
+
+    public void showCart(View view) {
+        if(AllData.cartList.size()>0){
+            Intent intent=new Intent(MainActivity.this,Cart.class);
+            startActivity(intent);
+        }
     }
 }
 

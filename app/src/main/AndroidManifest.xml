@@ -16,6 +16,9 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
+            android:name=".Cart"
+            android:exported="false" />
+        <activity
             android:name=".ProductDetails"
             android:exported="false"
             android:theme="@style/Theme.Food.ProductDetails" /> <!-- @style/Theme.Food.ProductDetails -->

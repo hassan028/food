@@ -1,57 +1,78 @@
 package com.example.food;
 
-public class Cart {
-    int id,menuId,quantity,orderNumber;
-    double subtotal;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-    public int getId() {
-        return id;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Cart extends AppCompatActivity {
+    ListView list;
+    int rowNumber=-1;
+    TextView tvSubtotal,tvTotalBill;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
+        list=findViewById(R.id.list);
+        tvSubtotal=findViewById(R.id.tvSubtotal);
+        tvTotalBill=findViewById(R.id.tvTotalBill);
+        cartAdaptor();
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void increaseQuantity(View view) {
+        LinearLayout parentRow = (LinearLayout) view.getParent();
+        rowNumber= list.getPositionForView((LinearLayout)view.getParent());
+
+        TextView quantityView = (TextView) parentRow.findViewById(R.id.tvQuantity);
+        int quantity = Integer.parseInt(quantityView.getText().toString());
+        quantity++;
+        AllData.cartList.get(rowNumber).setQuantity(quantity);
+        quantityView.setText(quantity+"");
+
+        cartAdaptor();
     }
 
-    public int getMenuId() {
-        return menuId;
+    public void decreaseQuantity(View view) {
+        rowNumber= list.getPositionForView((LinearLayout)view.getParent());
+        LinearLayout parentRow = (LinearLayout) view.getParent();
+
+        TextView quantityView = (TextView) parentRow.findViewById(R.id.tvQuantity);
+        int quantity = Integer.parseInt(quantityView.getText().toString());
+        quantity--;
+        if(quantity==0){
+            AllData.cartList.remove(rowNumber);
+            cartAdaptor();
+        }
+        if(quantity>0){
+            AllData.cartList.get(rowNumber).setQuantity(quantity);
+            quantityView.setText(quantity+"");
+            cartAdaptor();
+        }
+        if(AllData.cartList.size()==0){
+            finish();
+        }
     }
 
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
-    }
+    public void cartAdaptor(){
+        double subTotal=0;
+        int quantity;
+        double price;
+        for(int i=0;i<AllData.cartList.size();i++){
+            quantity=AllData.cartList.get(i).getQuantity();
+            price=AllData.cartList.get(i).getSubTotal();
+            subTotal=(quantity*price)+subTotal;
+        }
+        tvSubtotal.setText(subTotal+"");
+        subTotal+=(0.17 * subTotal);
+        tvTotalBill.setText(subTotal+"");
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(int orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Cart() {
-    }
-
-    public Cart(int id, int menuId, int quantity, int orderNumber, double subtotal) {
-        this.id = id;
-        this.menuId = menuId;
-        this.quantity = quantity;
-        this.orderNumber = orderNumber;
-        this.subtotal = subtotal;
+        CartAdaptor cartAdaptor=new CartAdaptor(AllData.cartList,Cart.this);
+        list.setAdapter(cartAdaptor);
     }
 }

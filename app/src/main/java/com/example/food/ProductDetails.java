@@ -3,22 +3,17 @@ package com.example.food;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +23,12 @@ public class ProductDetails extends AppCompatActivity  {
     TextView name,price,itemValue,detail;
     ImageView img;
     int index;
+    static int id=1;
     BottomSheetBehavior bottomSheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-        popularProduct=new ArrayList<>();
-        popularProduct=AllData.menuList;
 
         name=findViewById(R.id.name);
         price=findViewById(R.id.price);
@@ -45,7 +39,12 @@ public class ProductDetails extends AppCompatActivity  {
         Intent i = getIntent();
         int index=Integer.parseInt(i.getStringExtra("index"));
         this.index=index;
+
+        popularProduct=new ArrayList<>();
+        popularProduct=AllData.getCategoryProductList(i.getStringExtra("list"));
+
         setSizeOfScreen(index);
+
         price.setText("Rs. "+popularProduct.get(index).getPrice()+"");
         name.setText(popularProduct.get(index).getName());
         detail.setText(popularProduct.get(index).getDetails());
@@ -66,15 +65,13 @@ public class ProductDetails extends AppCompatActivity  {
         params.y=-20;
 
         getWindow().setAttributes(params);
-
-//        Transformation transformation = new RoundedTransformationBuilder()
+        Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
+        //        Transformation transformation = new RoundedTransformationBuilder()
 //                .borderColor(Color.TRANSPARENT)
 //                .borderWidthDp(2)
 //                .cornerRadiusDp(20)
 //                .oval(false)
 //                .build();
-
-        Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
     }
 
     public void increment(View view) {
@@ -94,10 +91,26 @@ public class ProductDetails extends AppCompatActivity  {
     }
 
     public void addToCart(View view) {
-//        AllData.addDataInCart(popularProduct.get(index));
-//        List<Product> cart;
-//        cart=AllData.getCart();
-//        Toast.makeText(ProductDetails.this, cart.size()+"", Toast.LENGTH_SHORT).show();
+        boolean found=false;
+        double subTotal=popularProduct.get(index).getPrice();
+        long menuId=popularProduct.get(index).getId();
+        int quantity=Integer.parseInt(itemValue.getText().toString());
+        long orderNumber=AllData.orderList.get(0).getOrderByDay();
+        String name=popularProduct.get(index).getName();
+        CartData temp=new CartData(id,quantity,orderNumber,menuId,subTotal,name);
+
+        int newQuantity;
+        for(int i=0;i<AllData.cartList.size();i++){
+            if(AllData.cartList.get(i).getMenuId()==menuId){
+                found=true;
+                newQuantity=AllData.cartList.get(i).getQuantity();
+                AllData.cartList.get(i).setQuantity(newQuantity+quantity);
+                AllData.cartList.get(i).setSubTotal(subTotal);
+            }
+        }
+        if(!found){
+            AllData.cartList.add(temp);
+        }
     }
 
     public void closeWindow(View view) {

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
 <!--    The Toolbar is basically the advanced successor of the ActionBar-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,51 +12,52 @@
         android:layout_height="wrap_content"
         android:background="?themeColor1"
         />
-    <LinearLayout
+    <ImageButton
+        android:layout_below="@+id/toolbar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_baseline_search_24"
+        android:background="?themeColor1"
+        android:focusable="true"
+        android:paddingLeft="5dp"
+        android:id="@+id/search"
+        android:onClick="search"
+        />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        >
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            >
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_baseline_search_24"
-                android:background="?themeColor1"
-                android:focusable="true"
-                android:paddingLeft="5dp"
-                android:onClick="search"
-                />
-        </RelativeLayout>
+        android:layout_height="45dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_toRightOf="@+id/search"
+        app:tabMode="scrollable"
+        app:tabMinWidth="110dp"
+        app:tabBackground="@color/green"
+        app:tabIndicatorColor="?themeColor3"
+        app:tabTextColor="@color/grey"
+        app:tabSelectedTextColor="@color/white"
+        app:tabIndicatorFullWidth="false"
+        />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="8.8"
-            app:tabMode="scrollable"
-            app:tabMinWidth="110dp"
-            app:tabBackground="@color/green"
-            app:tabIndicatorColor="?themeColor3"
-            app:tabTextColor="@color/grey"
-            app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorFullWidth="false"
-
-            />
-
-    </LinearLayout>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/tab_layout"
         android:background="@color/white"
-        android:outlineSpotShadowColor="@color/yellow"
+        android:outlineSpotShadowColor="@color/yellow" />
 
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/cart"
+        android:background="@drawable/circle"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:focusable="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="showCart"
         />
 
-</LinearLayout>
+</RelativeLayout>

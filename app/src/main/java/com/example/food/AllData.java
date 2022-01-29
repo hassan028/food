@@ -1,16 +1,12 @@
 package com.example.food;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Application;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AllData extends Application {
-    static List<Cart> cartList;
+    static List<CartData> cartList;
     static List<Order> orderList;
     static List<Category> categoryList;
     static List<MenuCategory> menuCategoryList;
@@ -18,7 +14,7 @@ public class AllData extends Application {
 
     public AllData() {
 
-        cartList=new ArrayList<>();
+        cartList=new ArrayList<CartData>();
         categoryList=new ArrayList<>();
         menuCategoryList=new ArrayList<>();
         menuList = new ArrayList<>();

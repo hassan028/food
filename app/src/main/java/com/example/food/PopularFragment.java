@@ -36,6 +36,7 @@ public class PopularFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ProductDetails.class);
                 intent.putExtra("index", position + "");
+                intent.putExtra("list","Popular");
                 startActivity(intent);
             }
         });
@@ -45,8 +46,6 @@ public class PopularFragment extends Fragment {
 
         return root;
     }
-
-
 
 }
 
