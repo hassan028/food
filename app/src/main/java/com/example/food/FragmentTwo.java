@@ -2,34 +2,33 @@ package com.example.food;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PopularFragment extends Fragment {
+public class FragmentTwo extends Fragment {
     ListView lvProduct;
-    List<Product> popularProductList;
+    List<Product> burgerProductList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment, null);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment,null);
         lvProduct = (ListView) root.findViewById(R.id.products);
 
-        popularProductList = new ArrayList<>();
+        burgerProductList = new ArrayList<>();
 
-        popularProductList = AllData.getCategoryProductList("Popular");
+        burgerProductList =  AllData.getCategoryProductList("Burger");
 
 
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -40,7 +39,7 @@ public class PopularFragment extends Fragment {
             }
         });
 
-        ProductAdaptor productAdaptor=new ProductAdaptor(popularProductList,getActivity());
+        ProductAdaptor productAdaptor=new ProductAdaptor(burgerProductList,getActivity());
         lvProduct.setAdapter(productAdaptor);
 
         return root;

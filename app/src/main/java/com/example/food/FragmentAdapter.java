@@ -1,5 +1,8 @@
 package com.example.food;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,6 +13,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     int noOfFragments;
+
     public FragmentAdapter(@NonNull FragmentManager fm, int numberOfFragments) {
 
         super(fm);
@@ -20,22 +24,24 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) { //position default value is zero
         if(position == 0){
-            PopularFragment fragmentOne = new PopularFragment();
+            Fragment fragmentOne = new PopularFragment();
             return fragmentOne;
+
         }
-//        else if(position == 1){
-//            Fragment fragmentTwo = new BestFragment();
-//            return fragmentTwo;
-//        }
-        else{
-            Fragment fragmentTwo = new BestFragment();
+        else if(position == 1){
+            FragmentTwo fragmentTwo = new FragmentTwo();
             return fragmentTwo;
         }
+        else{
+            Fragment fragmentThree = new FragmentTwo();
+            return fragmentThree;
+        }
+
 
     }
 
     @Override
     public int getCount() {
-        return 5;
+        return 3;
     }   // slide count
 }

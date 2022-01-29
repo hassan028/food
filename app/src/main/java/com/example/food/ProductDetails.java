@@ -34,7 +34,7 @@ public class ProductDetails extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         popularProduct=new ArrayList<>();
-        popularProduct=AllData.getMenu();
+        popularProduct=AllData.menuList;
 
         name=findViewById(R.id.name);
         price=findViewById(R.id.price);

@@ -10,7 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -32,30 +35,44 @@ public class MainActivity extends AppCompatActivity{
     ViewPager pager;
     FragmentAdapter adapter;
 
-    FirebaseDatabase mDatabase;
-    DatabaseReference mRef;
+    FirebaseDatabase foodDatabase;
+    DatabaseReference foodDbRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       loadData();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initViews();
+            }
+        }, 3000);
+
+
+    }
+
+    public void  initViews(){
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
 
         tabLayout = findViewById(R.id.tab_layout);
-        pager = (ViewPager)findViewById(R.id.pager);
+        pager = (ViewPager) findViewById(R.id.pager);
         tabLayout.addTab(tabLayout.newTab().setText("Popular"));
         tabLayout.addTab(tabLayout.newTab().setText("Burgers"));
         tabLayout.addTab(tabLayout.newTab().setText("Pizzas"));
-        tabLayout.addTab(tabLayout.newTab().setText("Beverages"));
-        tabLayout.addTab(tabLayout.newTab().setText("Desi"));
+       /* tabLayout.addTab(tabLayout.newTab().setText("Beverages"));
+        tabLayout.addTab(tabLayout.newTab().setText("Desi"));*/
+
         FragmentManager fm = getSupportFragmentManager();
-        adapter = new FragmentAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        adapter = new FragmentAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         pager.setAdapter(adapter);
 //        pager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -73,22 +90,39 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+    }
 
-        mDatabase = FirebaseDatabase.getInstance();
-        // mRef = mDatabase.getReference(); // Refrence of parent node
-        mRef = mDatabase.getReference("Menu"); // Refrence of chil node
+    public void loadData(){
+        AllData allData = new AllData();
+        loadFirebaseToList("Menu");
+        loadFirebaseToList("Category");
+        loadFirebaseToList("MenuCategory");
+    }
+    public void loadFirebaseToList(String table){
 
 
-
-        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        foodDatabase = FirebaseDatabase.getInstance();
+        foodDbRef = foodDatabase.getReference(table);
+        foodDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Toast.makeText(MainActivity.this, "Hello usman", Toast.LENGTH_SHORT).show();
-                for(DataSnapshot snap : snapshot.getChildren()) {
-                    Toast.makeText(MainActivity.this, snap.getKey(), Toast.LENGTH_SHORT).show();
-                    break;
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    if(table.equals("Menu")) {
+                        Product tempProduct = snap.getValue(Product.class);
+                        AllData.menuList.add(tempProduct);
+                    }
+                    else if(table.equals("Category")){
+                        Category tempCategory = snap.getValue(Category.class);
+                        AllData.categoryList.add(tempCategory);
+
+                    }
+                    else if(table.equals("MenuCategory")){
+                        MenuCategory tempMenuCategory = snap.getValue(MenuCategory.class);
+                        AllData.menuCategoryList.add(tempMenuCategory);
+                    }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -96,6 +130,13 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
+    public void search(View view) {
+        Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+        startActivity(intent);
+
+    }
+}
 
     /*public void popular(View view) {
         frag(1);
@@ -120,4 +161,3 @@ public class MainActivity extends AppCompatActivity{
         fragmentTransaction.commit(); // Save changes
     }
 */
-}

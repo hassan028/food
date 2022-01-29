@@ -10,68 +10,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllData extends Application {
-    static List<Product> popularProduct;
-    static List<Cart> cart;
-    static List<Order> order;
-    static List<Category> category;
-    static List<MenuCategory> menuCategory;
-    static List<Product> menu;
+    static List<Cart> cartList;
+    static List<Order> orderList;
+    static List<Category> categoryList;
+    static List<MenuCategory> menuCategoryList;
+    static List<Product> menuList;
 
     public AllData() {
-        popularProduct=new ArrayList<>();
-        cart=new ArrayList<>();
-        category=new ArrayList<>();
-        menuCategory=new ArrayList<>();
-        menu=new ArrayList<>();
-        order=new ArrayList<>();
+
+        cartList=new ArrayList<>();
+        categoryList=new ArrayList<>();
+        menuCategoryList=new ArrayList<>();
+        menuList = new ArrayList<>();
+        orderList = new ArrayList<>();
     }
 
-    //category getters and setters
-    public static List<Category> getCategory() {
-        return category;
-    }
+    public static List<Product>  getCategoryProductList(String catName) {
+        List<Product>  categoryProductList = new ArrayList<>();
+        long idPopular = -1;
+        long menuId;
+        Product tempProduct;
+        for(int i = 0; i < categoryList.size(); i++){
+            if( categoryList.get(i).getName().equals(catName)){
+                idPopular = categoryList.get(i).getId();
+                break;
+            }
+        }
 
-    public static void setCategory(List<Category> category) {
-        AllData.category = category;
-    }
+        for(int i = 0; i < menuCategoryList.size(); i++){
+            if(menuCategoryList.get(i).getCatId() == idPopular){
+                menuId = menuCategoryList.get(i).getMenuId();
+                for (int j=0; j < menuList.size(); j++){
+                    if(menuId == menuList.get(j).getId()){
+                        tempProduct = menuList.get(j);
+                        categoryProductList.add(tempProduct);
+                    }
+                }
+            }
+        }
 
-//popular product getters and setters
-    public static List<Product> getPopularProduct() {
-        return popularProduct;
-    }
+        return  categoryProductList;
 
-    public static void setPopularProduct(List<Product> popularProduct) {
-        AllData.popularProduct = popularProduct;
-    }
-
-//cart getters and setters
-    public static List<Cart> getCart() {
-        return cart;
-    }
-
-    public static void setCart(List<Cart> cart) {
-        AllData.cart = cart;
-    }
-//menu getters and setters
-    public static List<Product> getMenu() {
-        return menu;
-    }
-
-    public static void setMenu(List<Product> menu) {
-        AllData.menu = menu;
-    }
-
-    //menu category setters and getters
-    public static List<MenuCategory> getMenuCategory() {
-        return menuCategory;
-    }
-
-    public static void setMenuCategory(List<MenuCategory> menuCategory) {
-        AllData.menuCategory = menuCategory;
     }
 
 
-    public static void setPopularProduct() {
+    /*public static void setPopularProduct() {
         long menuId;
 
         for (int j = 0; j < menuCategory.size(); j++) {
@@ -85,13 +68,6 @@ public class AllData extends Application {
                 }
             }
         }
-    }
-//Order List Getters and Setters
-    public static List<Order> getOrder() {
-        return order;
-    }
+    }*/
 
-    public static void setOrder(List<Order> order) {
-        AllData.order = order;
-    }
 }

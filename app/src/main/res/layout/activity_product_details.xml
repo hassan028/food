@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:weightSum="2"
     tools:context=".ProductDetails"
+
     >
     <LinearLayout
         android:id="@+id/sheet"
@@ -145,7 +146,8 @@
                         >
                         <Button
                             android:background="@drawable/circle"
-                            android:layout_width="match_parent"
+                            android:layout_width="60dp"
+
                             android:text="-"
                             android:layout_marginLeft="15dp"
                             android:layout_marginBottom="15dp"
@@ -180,7 +182,7 @@
                         >
                         <Button
                             android:background="@drawable/circle"
-                            android:layout_width="match_parent"
+                            android:layout_width="60dp"
                             android:text="+"
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="15dp"
