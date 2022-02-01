@@ -99,4 +99,9 @@ public class ProductAdaptor extends BaseAdapter {
 
         return v;
     }
+
+    public void filterList(List<Product> filterList){
+        this.productsList = filterList;
+        notifyDataSetChanged();
+    }
 }
