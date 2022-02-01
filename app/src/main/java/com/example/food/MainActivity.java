@@ -13,6 +13,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.widget.GridView;
@@ -38,18 +41,32 @@ public class MainActivity extends AppCompatActivity{
 
     FirebaseDatabase foodDatabase;
     DatabaseReference foodDbRef;
+    float tabWidth;
+
+    private static final String TAG = "My Tag";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       loadData();
+
+
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics ();
+        display.getMetrics(outMetrics);
+        float density  = getResources().getDisplayMetrics().density;
+        float dpHeight = outMetrics.heightPixels / density;
+        float dpWidth  = outMetrics.widthPixels / density;
+
+        tabWidth = (dpWidth - 45f) / 3;
+
+        loadData();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 initViews();
             }
-        }, 3000);
+        }, 6000);
 
 
     }
@@ -62,9 +79,12 @@ public class MainActivity extends AppCompatActivity{
 
         tabLayout = findViewById(R.id.tab_layout);
         pager = (ViewPager) findViewById(R.id.pager);
+
+
         tabLayout.addTab(tabLayout.newTab().setText("Popular"));
         tabLayout.addTab(tabLayout.newTab().setText("Burgers"));
         tabLayout.addTab(tabLayout.newTab().setText("Pizzas"));
+
        /* tabLayout.addTab(tabLayout.newTab().setText("Beverages"));
         tabLayout.addTab(tabLayout.newTab().setText("Desi"));*/
 
@@ -72,13 +92,15 @@ public class MainActivity extends AppCompatActivity{
         adapter = new FragmentAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         pager.setAdapter(adapter);
 //        pager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+
                 pager.setCurrentItem(tab.getPosition());
+
             }
 
             @Override
@@ -104,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
 
         foodDatabase = FirebaseDatabase.getInstance();
         foodDbRef = foodDatabase.getReference(table);
-        foodDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        foodDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {

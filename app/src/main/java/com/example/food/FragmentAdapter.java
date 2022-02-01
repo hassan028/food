@@ -13,6 +13,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     int noOfFragments;
+    //private static final String TAG = "My Tag";
 
     public FragmentAdapter(@NonNull FragmentManager fm, int numberOfFragments) {
 
@@ -23,10 +24,10 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) { //position default value is zero
+//        Log.d(TAG,"onFailure: "+ position);
         if(position == 0){
             Fragment fragmentOne = new PopularFragment();
             return fragmentOne;
-
         }
         else if(position == 1){
             FragmentTwo fragmentTwo = new FragmentTwo();
