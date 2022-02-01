@@ -102,28 +102,28 @@ public class MainActivity extends AppCompatActivity{
     }
     public void loadFirebaseToList(String table){
 
-
         foodDatabase = FirebaseDatabase.getInstance();
         foodDbRef = foodDatabase.getReference(table);
         foodDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(table.equals("Order")){
-                    Order tempOrder=snapshot.getValue(Order.class);
-                    AllData.orderList.add(tempOrder);
-                }else {
-                    for (DataSnapshot snap : snapshot.getChildren()) {
-                        if (table.equals("Menu")) {
-                            Product tempProduct = snap.getValue(Product.class);
-                            AllData.menuList.add(tempProduct);
-                        } else if (table.equals("Category")) {
-                            Category tempCategory = snap.getValue(Category.class);
-                            AllData.categoryList.add(tempCategory);
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    if(table.equals("Menu")) {
+                        Product tempProduct = snap.getValue(Product.class);
+                        AllData.menuList.add(tempProduct);
+                    }
+                    else if(table.equals("Category")){
+                        Category tempCategory = snap.getValue(Category.class);
+                        AllData.categoryList.add(tempCategory);
 
-                        } else if (table.equals("MenuCategory")) {
-                            MenuCategory tempMenuCategory = snap.getValue(MenuCategory.class);
-                            AllData.menuCategoryList.add(tempMenuCategory);
-                        }
+                    }
+                    else if(table.equals("MenuCategory")){
+                        MenuCategory tempMenuCategory = snap.getValue(MenuCategory.class);
+                        AllData.menuCategoryList.add(tempMenuCategory);
+                    }
+                    else if(table.equals("Order")) {
+                        Order tempOrder = snapshot.getValue(Order.class);
+                        AllData.orderList.add(tempOrder);
                     }
                 }
             }

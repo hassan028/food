@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1.9">
+        android:layout_weight="2.3">
         <Button
 
             android:id="@+id/btnDecrease"
@@ -53,7 +53,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3.4">
+        android:layout_weight="3">
         <TextView
             android:id="@+id/tvMenuName"
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:layout_toRightOf="@id/btnIncrease"
             android:layout_gravity="center"
             android:textColor="@color/black"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:textAlignment="center"
             />
