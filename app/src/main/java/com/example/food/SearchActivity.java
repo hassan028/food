@@ -3,9 +3,12 @@ package com.example.food;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -17,13 +20,34 @@ public class SearchActivity extends AppCompatActivity {
     ListView lvProduct;
     EditText etSeaechBar;
     ProductAdaptor productAdaptor;
+
     List<Product> list;
+    int length=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         lvProduct = (ListView) findViewById(R.id.products);
+
+
+
+        lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(length>0){
+                    Intent intent = new Intent(SearchActivity.this, ProductDetails.class);
+                    intent.putExtra("index", position + "");
+                    intent.putExtra("list","Filter");
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(SearchActivity.this, ProductDetails.class);
+                    intent.putExtra("index", position + "");
+                    intent.putExtra("list","Menu");
+                    startActivity(intent);
+                }
+            }
+        });
+
         etSeaechBar = findViewById(R.id.etSearchBar);
 
         list = AllData.menuList;
@@ -46,8 +70,8 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
-
+                length=s.toString().trim().length();
+                filter(s.toString().trim());
             }
         });
     }
@@ -60,6 +84,7 @@ public class SearchActivity extends AppCompatActivity {
             }
 
         }
+        AllData.filteredList=filterList;
         productAdaptor.filterList(filterList);
         lvProduct.setAdapter(productAdaptor);
     }

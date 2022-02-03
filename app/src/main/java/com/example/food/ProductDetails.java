@@ -41,10 +41,17 @@ public class ProductDetails extends AppCompatActivity  {
         this.index=index;
 
         popularProduct=new ArrayList<>();
-        popularProduct=AllData.getCategoryProductList(i.getStringExtra("list"));
+
+        if(i.getStringExtra("list").equals("Menu")){
+            popularProduct=AllData.menuList;
+        }else if(i.getStringExtra("list").equals("Filter")){
+            popularProduct=AllData.filteredList;
+        }else{
+            popularProduct=AllData.getCategoryProductList(i.getStringExtra("list"));
+        }
+
 
         setSizeOfScreen(index);
-
         price.setText("Rs. "+popularProduct.get(index).getPrice()+"");
         name.setText(popularProduct.get(index).getName());
         detail.setText(popularProduct.get(index).getDetails());
