@@ -34,10 +34,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8.7"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:gravity="center_vertical"
             android:background="@color/white"
-            android:hint="Search menu items"
+            android:hint="Search by Name/Price/Category/Detail"
 
             />
     </LinearLayout>

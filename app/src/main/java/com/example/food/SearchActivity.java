@@ -80,7 +80,7 @@ public class SearchActivity extends AppCompatActivity {
         List<Product> filterList = new ArrayList<>();
         for(Product items : list){
 
-            if(items.getName().toLowerCase().contains(text.toLowerCase()) || Double.toString(items.getPrice()).contains(text) || AllData.getCategoryName(items).toLowerCase().contains(text.toLowerCase())){
+            if(items.getName().toLowerCase().contains(text.toLowerCase()) || Double.toString(items.getPrice()).contains(text) || items.getDetails().toLowerCase().contains(text.toLowerCase()) || AllData.getCategoryName(items).toLowerCase().contains(text.toLowerCase())){
                 filterList.add(items);
 
             }

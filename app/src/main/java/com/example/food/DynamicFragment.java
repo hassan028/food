@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class DynamicFragment extends Fragment {
     List<Product> popularProductList;
     FirebaseDatabase foodDatabase;
     DatabaseReference foodDbRef;
+    private static final String TAG = "My Tag";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,8 +62,13 @@ public class DynamicFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 popularProductList = AllData.getCategoryProductList(b.getString("Fragment"));
-                ProductAdaptor productAdaptor=new ProductAdaptor(popularProductList,getActivity());
-                lvProduct.setAdapter(productAdaptor);
+                if(getActivity()==null){
+                    Log.d(TAG,"onFailure: this is null " );
+                }else {
+                    Log.d(TAG,"onFailure:  " + getActivity());
+                    ProductAdaptor productAdaptor = new ProductAdaptor(popularProductList, getActivity());
+                    lvProduct.setAdapter(productAdaptor);
+                }
             }
 
             @Override
