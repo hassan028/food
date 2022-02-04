@@ -12,14 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PopularFragment extends Fragment {
+public class DynamicFragment extends Fragment {
     ListView lvProduct;
     List<Product> popularProductList;
-
+    FirebaseDatabase foodDatabase;
+    DatabaseReference foodDbRef;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,16 +35,18 @@ public class PopularFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment, null);
         lvProduct = (ListView) root.findViewById(R.id.products);
 
+        Bundle b = getArguments();
+
         popularProductList = new ArrayList<>();
 
-        popularProductList = AllData.getCategoryProductList("Popular");
+        popularProductList = AllData.getCategoryProductList(b.getString("Fragment"));
 
 
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ProductDetails.class);
                 intent.putExtra("index", position + "");
-                intent.putExtra("list","Popular");
+                intent.putExtra("list",b.getString("Fragment"));
                 startActivity(intent);
             }
         });
@@ -44,10 +54,28 @@ public class PopularFragment extends Fragment {
         ProductAdaptor productAdaptor=new ProductAdaptor(popularProductList,getActivity());
         lvProduct.setAdapter(productAdaptor);
 
+        foodDatabase = FirebaseDatabase.getInstance();
+        foodDbRef = foodDatabase.getReference("Menu");
+        foodDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                popularProductList = AllData.getCategoryProductList(b.getString("Fragment"));
+                ProductAdaptor productAdaptor=new ProductAdaptor(popularProductList,getActivity());
+                lvProduct.setAdapter(productAdaptor);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         return root;
     }
 
 }
+
 
     /*public void getMenu(){
         menu.addValueEventListener(new ValueEventListener() {

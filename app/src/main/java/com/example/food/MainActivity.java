@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.style.DynamicDrawableSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -41,7 +44,10 @@ public class MainActivity extends AppCompatActivity{
 
     FirebaseDatabase foodDatabase;
     DatabaseReference foodDbRef;
-    float tabWidth;
+
+    static int count = 0;
+
+
 
     private static final String TAG = "My Tag";
     @Override
@@ -50,16 +56,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
 
-
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics outMetrics = new DisplayMetrics ();
-        display.getMetrics(outMetrics);
-        float density  = getResources().getDisplayMetrics().density;
-        float dpHeight = outMetrics.heightPixels / density;
-        float dpWidth  = outMetrics.widthPixels / density;
-
-        tabWidth = (dpWidth - 45f) / 3;
-
         loadData();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -67,6 +63,10 @@ public class MainActivity extends AppCompatActivity{
                 initViews();
             }
         }, 6000);
+
+
+
+
 
 
     }
@@ -81,9 +81,10 @@ public class MainActivity extends AppCompatActivity{
         pager = (ViewPager) findViewById(R.id.pager);
 
 
-        tabLayout.addTab(tabLayout.newTab().setText("Popular"));
-        tabLayout.addTab(tabLayout.newTab().setText("Burgers"));
-        tabLayout.addTab(tabLayout.newTab().setText("Pizzas"));
+       for(Category objCat : AllData.categoryList){
+            tabLayout.addTab(tabLayout.newTab().setText(objCat.getName()));
+        }
+
 
        /* tabLayout.addTab(tabLayout.newTab().setText("Beverages"));
         tabLayout.addTab(tabLayout.newTab().setText("Desi"));*/
@@ -98,9 +99,7 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
                 pager.setCurrentItem(tab.getPosition());
-
             }
 
             @Override
@@ -113,13 +112,13 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+
     }
 
     public void loadData(){
         AllData allData = new AllData();
         loadFirebaseToList("Menu");
         loadFirebaseToList("Category");
-        loadFirebaseToList("MenuCategory");
         loadFirebaseToList("Order");
     }
     public void loadFirebaseToList(String table){
@@ -129,6 +128,16 @@ public class MainActivity extends AppCompatActivity{
         foodDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(table.equals("Menu")) {
+                    AllData.menuList.clear();
+                }
+                else if(table.equals("Category")){
+                    AllData.categoryList.clear();
+
+                }
+                else if(table.equals("Order")){
+                    AllData.orderList.clear();
+                }
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     if(table.equals("Menu")) {
                         Product tempProduct = snap.getValue(Product.class);
@@ -137,11 +146,6 @@ public class MainActivity extends AppCompatActivity{
                     else if(table.equals("Category")){
                         Category tempCategory = snap.getValue(Category.class);
                         AllData.categoryList.add(tempCategory);
-
-                    }
-                    else if(table.equals("MenuCategory")){
-                        MenuCategory tempMenuCategory = snap.getValue(MenuCategory.class);
-                        AllData.menuCategoryList.add(tempMenuCategory);
                     }
                     else if(table.equals("Order")) {
                         Order tempOrder = snapshot.getValue(Order.class);
@@ -170,6 +174,7 @@ public class MainActivity extends AppCompatActivity{
             startActivity(intent);
         }
     }
+
 }
 
     /*public void popular(View view) {

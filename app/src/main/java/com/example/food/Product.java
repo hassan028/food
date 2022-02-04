@@ -1,11 +1,8 @@
 package com.example.food;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class Product {
     String Name,img,Details;
-    int Id,OrderCount;
+    int Id,CatId,OrderCount;
     double Price;
 
     public String getName() {
@@ -56,14 +53,23 @@ public class Product {
         Price = price;
     }
 
+    public int getCatId() {
+        return CatId;
+    }
+
+    public void setCatId(int catId) {
+        CatId = catId;
+    }
+
     public Product() {
     }
 
-    public Product(String name, String img, String details, int id, int orderCount, double price) {
+    public Product(String name, String img, String details, int id, int catId, int orderCount, double price) {
         Name = name;
         this.img = img;
         Details = details;
         Id = id;
+        CatId = catId;
         OrderCount = orderCount;
         Price = price;
     }

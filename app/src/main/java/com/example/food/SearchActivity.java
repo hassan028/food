@@ -79,8 +79,16 @@ public class SearchActivity extends AppCompatActivity {
     private void filter(String text) {
         List<Product> filterList = new ArrayList<>();
         for(Product items : list){
-            if(items.getName().toLowerCase().contains(text.toLowerCase()) || Double.toString(items.getPrice()).contains(text) ){
+
+            if(items.getName().toLowerCase().contains(text.toLowerCase()) || Double.toString(items.getPrice()).contains(text) || AllData.getCategoryName(items).toLowerCase().contains(text.toLowerCase())){
                 filterList.add(items);
+
+            }
+            if("Popular".toLowerCase().contains(text.toLowerCase())){
+                if(items.getOrderCount() > 10) {
+                    if(!filterList.contains(items))
+                        filterList.add(items);
+                }
             }
 
         }

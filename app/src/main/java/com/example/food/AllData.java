@@ -9,20 +9,62 @@ public class AllData extends Application {
     static List<CartData> cartList;
     static List<Order> orderList;
     static List<Category> categoryList;
-    static List<MenuCategory> menuCategoryList;
     static List<Product> menuList;
     static List<Product> filteredList;
     public AllData() {
 
         cartList=new ArrayList<CartData>();
         categoryList=new ArrayList<>();
-        menuCategoryList=new ArrayList<>();
         menuList = new ArrayList<>();
         orderList = new ArrayList<>();
         filteredList=new ArrayList<>();
     }
-
     public static List<Product>  getCategoryProductList(String catName) {
+        List<Product>  categoryProductList = new ArrayList<>();
+
+        if(catName.equals("Popular")){
+            categoryProductList = getPopularList();
+            return  categoryProductList;
+        }
+
+        long categoryId = -1;
+        for (int i = 0; i<categoryList.size(); i++){
+            if(categoryList.get(i).getName().equals(catName)){
+                categoryId = categoryList.get(i).getId();
+                break;
+            }
+        }
+        for(int i = 0; i < menuList.size(); i++ ){
+            if(menuList.get(i).CatId == categoryId){
+                categoryProductList.add(menuList.get(i));
+            }
+        }
+
+        return  categoryProductList;
+
+    }
+    public static String getCategoryName(Product tempProd){
+        for (Category tempCat : categoryList){
+            if(tempProd.getCatId() == tempCat.getId()){
+                return tempCat.getName();
+            }
+        }
+        return null;
+    }
+
+    public static List<Product> getPopularList() {
+        List<Product>  popularList = new ArrayList<>();
+
+        for(int i = 0; i < menuList.size(); i++ ){
+            if(menuList.get(i).getOrderCount() > 10){
+                popularList.add(menuList.get(i));
+
+            }
+        }
+        return  popularList;
+    }
+
+    /*public static List<Product>  getCategoryProductList(String catName) {
         List<Product>  categoryProductList = new ArrayList<>();
         long idPopular = -1;
         long menuId;
@@ -48,7 +90,7 @@ public class AllData extends Application {
 
         return  categoryProductList;
 
-    }
+    }*/
 
 
     /*public static void setPopularProduct() {
