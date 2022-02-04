@@ -40,9 +40,11 @@ public class Cart extends AppCompatActivity {
 
     public void decreaseQuantity(View view) {
         rowNumber= list.getPositionForView((LinearLayout)view.getParent());
+
         LinearLayout parentRow = (LinearLayout) view.getParent();
 
         TextView quantityView = (TextView) parentRow.findViewById(R.id.tvQuantity);
+
         int quantity = Integer.parseInt(quantityView.getText().toString());
         quantity--;
         if(quantity==0){

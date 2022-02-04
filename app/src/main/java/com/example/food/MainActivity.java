@@ -44,31 +44,22 @@ public class MainActivity extends AppCompatActivity{
 
     FirebaseDatabase foodDatabase;
     DatabaseReference foodDbRef;
-
     static int count = 0;
-
-
-
     private static final String TAG = "My Tag";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.splah_screen);
 
         loadData();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                setContentView(R.layout.activity_main);
                 initViews();
             }
         }, 6000);
-
-
-
-
-
-
     }
 
     public void  initViews(){
