@@ -63,6 +63,17 @@ public class AllData extends Application {
         }
         return  popularList;
     }
+    public static double getCartSubtotal(){
+        double subTotal=0;
+        int quantity;
+        double price;
+        for(int i=0;i<AllData.cartList.size();i++){
+            quantity=AllData.cartList.get(i).getQuantity();
+            price=AllData.cartList.get(i).getSubTotal();
+            subTotal=(quantity*price)+subTotal;
+        }
+        return subTotal;
+    }
 
     /*public static List<Product>  getCategoryProductList(String catName) {
         List<Product>  categoryProductList = new ArrayList<>();

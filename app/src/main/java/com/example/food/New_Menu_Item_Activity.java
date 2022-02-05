@@ -94,7 +94,7 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
 
                         int size=AllData.menuList.size();
                         size--;
-                        menuId=AllData.menuList.get(size).getId();
+                        menuId = AllData.menuList.get(size).getId();
                         menuId++;
 
                         Product p=new Product(menuName,url,menuDetail,menuId,categoryId,0,menuPrice);

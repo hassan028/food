@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -42,24 +44,18 @@ public class MainActivity extends AppCompatActivity{
     ViewPager pager;
     FragmentAdapter adapter;
 
-    FirebaseDatabase foodDatabase;
-    DatabaseReference foodDbRef;
-    static int count = 0;
+
+
+
     private static final String TAG = "My Tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splah_screen);
+        setContentView(R.layout.activity_main);
 
-        loadData();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setContentView(R.layout.activity_main);
-                initViews();
-            }
-        }, 6000);
+        initViews();
+
     }
 
     public void  initViews(){
@@ -104,54 +100,12 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
+
     }
 
-    public void loadData(){
-        AllData allData = new AllData();
-        loadFirebaseToList("Menu");
-        loadFirebaseToList("Category");
-        loadFirebaseToList("Order");
-    }
-    public void loadFirebaseToList(String table){
 
-        foodDatabase = FirebaseDatabase.getInstance();
-        foodDbRef = foodDatabase.getReference(table);
-        foodDbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(table.equals("Menu")) {
-                    AllData.menuList.clear();
-                }
-                else if(table.equals("Category")){
-                    AllData.categoryList.clear();
 
-                }
-                else if(table.equals("Order")){
-                    AllData.orderList.clear();
-                }
-                for (DataSnapshot snap : snapshot.getChildren()) {
-                    if(table.equals("Menu")) {
-                        Product tempProduct = snap.getValue(Product.class);
-                        AllData.menuList.add(tempProduct);
-                    }
-                    else if(table.equals("Category")){
-                        Category tempCategory = snap.getValue(Category.class);
-                        AllData.categoryList.add(tempCategory);
-                    }
-                    else if(table.equals("Order")) {
-                        Order tempOrder = snapshot.getValue(Order.class);
-                        AllData.orderList.add(tempOrder);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
 
     public void search(View view) {
         Intent intent = new Intent(MainActivity.this,SearchActivity.class);
@@ -165,6 +119,13 @@ public class MainActivity extends AppCompatActivity{
             startActivity(intent);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        finish();
+    }
+
 
 }
 
