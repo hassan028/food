@@ -135,6 +135,10 @@
             android:layout_height="0dp"
             android:layout_weight="1.4"/>
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"/>
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="0.5">
@@ -143,7 +147,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
                 android:text="SubTotal"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
@@ -153,7 +156,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:text="Date"
                 android:textColor="@color/black"
@@ -168,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
+
                 android:text="17% GST"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
@@ -178,10 +180,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
-                android:text="Date"
                 android:maxLength="7"
+                android:text="Date"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
         </RelativeLayout>
@@ -195,18 +196,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
+
                 android:text="Total Bill"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/totalBillReciept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="15dp"
+
                 android:layout_marginRight="10dp"
                 android:text="Date"
                 android:textColor="@color/black"

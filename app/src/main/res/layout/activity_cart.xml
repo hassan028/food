@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="Subtotal"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+               android:textSize="21sp"  />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                 android:layout_toLeftOf="@+id/tvSubtotal"
                 android:text="Rs."
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="21sp" />
 
             <TextView
                 android:id="@+id/tvSubtotal"
@@ -72,9 +72,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="300"
+                android:maxLength="11"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="21sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,7 +84,18 @@
                 android:layout_marginTop="5dp"
                 android:text="17% GST"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+               android:textSize="21sp"  />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubtotal"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tvGst"
+                android:text="Rs."
+                android:textColor="@color/black"
+                android:textSize="21sp" />
 
             <TextView
                 android:id="@+id/tvGst"
@@ -92,45 +104,46 @@
                 android:layout_below="@+id/tvSubtotal"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
+                android:maxLength="11"
                 android:text="17%"
-                android:maxLength="6"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="21sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TotalBill"
-                android:textSize="25sp"
+               android:textSize="21sp"
                 android:layout_below="@+id/tvGst"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs."
-                android:textSize="25sp"
-                android:layout_toLeftOf="@+id/tvTotalBill"
-                android:layout_marginRight="10dp"
                 android:layout_below="@+id/tvGst"
-                android:textColor="@color/black"
-                android:textStyle="bold"
                 android:layout_marginTop="5dp"
-                />
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tvTotalBill"
+                android:text="Rs."
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvTotalBill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tvGst"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:maxLength="11"
                 android:text="250"
                 android:textAlignment="textEnd"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/tvGst"
-                android:textSize="25sp"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"
-                />
+                android:textSize="21sp"
+                android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -138,13 +151,14 @@
             android:layout_weight="1.5">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="?themeColor2"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/oval_rectangle_orange"
+                android:onClick="ProceedOrder"
                 android:padding="15dp"
                 android:text="Proceed to order"
-                android:onClick="ProceedOrder"/>
+                android:textColor="@color/black" />
         </RelativeLayout>
 
 
