@@ -62,7 +62,7 @@ public class ProductDetails extends AppCompatActivity  {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width=dm.widthPixels;
         int height=dm.heightPixels;
-        getWindow().setLayout(width,(int)(height*0.9));
+        getWindow().setLayout(width,(int)(height*0.7));
 
         WindowManager.LayoutParams params=getWindow().getAttributes();
         params.gravity= Gravity.BOTTOM;

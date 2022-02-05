@@ -13,7 +13,6 @@
         android:background="@drawable/rounded"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         android:layout_weight="1">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,6 +20,7 @@
             >
 
             <ImageView
+                android:background="@drawable/popup_background"
                 android:id="@+id/img"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -53,7 +53,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1.2">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -62,24 +62,33 @@
                     android:textColor="@color/black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="15dp"
+                    android:textStyle="bold"
                     android:id="@+id/name"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/price"
-                    android:textSize="22dp"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
+                android:layout_weight="0.8">
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="price"
-                    />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:text="price"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="22dp" />
+                </RelativeLayout>
             </LinearLayout>
 
 
@@ -87,16 +96,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="0.8">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
             <TextView
-                android:textSize="22dp"
-                android:textColor="@color/black"
-                android:gravity="center_vertical"
+                android:textSize="18dp"
+                android:textColor="#656565"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:id="@+id/detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Details"/>
+            </ScrollView>
 
         </LinearLayout>
         <LinearLayout
@@ -104,49 +118,56 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <TextView
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="22dp"
+                android:textSize="20dp"
                 android:textColor="@color/black"
-                android:gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:text="+ Add special instructions"
+                android:hint="+ Add special instructions"
+                android:textAlignment="textStart"
+                android:textColorHint="?themeColor2"
+                android:background="@null"
+
                 />
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:weightSum="2"
             android:orientation="vertical"
             android:layout_weight="2">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.6"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:weightSum="10"
-                android:layout_weight="1.4">
+                android:layout_weight="2">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"/>
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_weight="4"
                     >
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_weight="2"
+                        android:layout_weight="1.5"
                         >
                         <Button
                             android:background="@drawable/circle"
-                            android:layout_width="60dp"
-
+                            android:layout_width="50dp"
                             android:text="-"
-                            android:layout_marginLeft="15dp"
+
                             android:layout_marginBottom="15dp"
                             android:onClick="decrement"
                             android:textColor="@color/white"
@@ -165,6 +186,7 @@
                             android:textSize="22dp"
                             android:layout_marginBottom="15dp"
                             android:textColor="@color/black"
+                            android:textStyle="bold"
                             android:text="1"
                             android:id="@+id/itemValue"
                             android:gravity="center"
@@ -175,13 +197,13 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_weight="2"
+                        android:layout_weight="1.5"
                         >
                         <Button
                             android:background="@drawable/circle"
-                            android:layout_width="60dp"
+                            android:layout_width="50dp"
                             android:text="+"
-                            android:layout_marginRight="15dp"
+
                             android:layout_marginBottom="15dp"
                             android:onClick="increment"
                             android:textColor="@color/white"
@@ -192,7 +214,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_weight="5.7"
                     android:gravity="center"
                     >
                     <Button
