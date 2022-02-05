@@ -1,18 +1,11 @@
 package com.example.food;
 
 public class CartData {
-    int id,quantity;
-    long orderNumber,menuId;
+    int quantity;
+    long menuId;
     double subTotal;
     String name;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -22,13 +15,7 @@ public class CartData {
         this.quantity = quantity;
     }
 
-    public long getOrderNumber() {
-        return orderNumber;
-    }
 
-    public void setOrderNumber(long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
 
     public long getMenuId() {
         return menuId;
@@ -57,10 +44,9 @@ public class CartData {
     public CartData() {
     }
 
-    public CartData(int id, int quantity, long orderNumber, long menuId, double subTotal, String name) {
-        this.id = id;
+    public CartData( int quantity, long menuId, double subTotal, String name) {
         this.quantity = quantity;
-        this.orderNumber = orderNumber;
+
         this.menuId = menuId;
         this.subTotal = subTotal;
         this.name = name;

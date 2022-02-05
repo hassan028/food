@@ -1,19 +1,11 @@
 package com.example.food;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
@@ -22,11 +14,13 @@ public class CartAdaptor extends BaseAdapter {
     List<CartData> cartDataList;
     LayoutInflater inflater;
     Context c;
+    int check;
 
-    public CartAdaptor(List<CartData> cartDataList , Context c) {
+    public CartAdaptor(List<CartData> cartDataList , Context c,int ch) {
         this.cartDataList = cartDataList;
         this.c=c;
         inflater=(LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.check = ch;
     }
 
 
@@ -47,17 +41,35 @@ public class CartAdaptor extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v=inflater.inflate(R.layout.cart_row,null);
-        CartData temp=cartDataList.get(position);
+        if(check==0) {
+            View v = inflater.inflate(R.layout.cart_row, null);
+            CartData temp = cartDataList.get(position);
 
-        TextView tvQuantity=v.findViewById(R.id.tvQuantity);
-        TextView tvMenuName=v.findViewById(R.id.tvMenuName);
-        TextView tvMenuSubtotal=v.findViewById(R.id.tvMenuSubtotal);
+            TextView tvQuantity = v.findViewById(R.id.tvQuantity);
+            TextView tvMenuName = v.findViewById(R.id.tvMenuName);
+            TextView tvMenuSubtotal = v.findViewById(R.id.tvMenuSubtotal);
 
-        tvQuantity.setText(temp.getQuantity()+"");
-        tvMenuName.setText(temp.getName()+"");
-        tvMenuSubtotal.setText(" Rs. "+(temp.getSubTotal()*temp.getQuantity())+"");
+            tvQuantity.setText(temp.getQuantity() + "");
+            tvMenuName.setText(temp.getName() + "");
+            tvMenuSubtotal.setText(" Rs. " + (temp.getSubTotal() * temp.getQuantity()) + "");
+            return v;
+        }
+        else{
+            View v = inflater.inflate(R.layout.reciept_row, null);
+            CartData temp = cartDataList.get(position);
 
-        return v;
+            TextView tvQuantity = v.findViewById(R.id.tvQty);
+            TextView tvName = v.findViewById(R.id.tvItem);
+
+            TextView price = v.findViewById(R.id.totalPrice);
+
+            tvQuantity.setText(temp.getQuantity() + "");
+            tvName.setText(temp.getName()+"");
+
+            price.setText(" Rs. " + (temp.getSubTotal() * temp.getQuantity()) + "");
+            return v;
+        }
+
+
     }
 }

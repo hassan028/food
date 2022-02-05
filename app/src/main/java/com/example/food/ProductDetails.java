@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -23,7 +22,6 @@ public class ProductDetails extends AppCompatActivity  {
     TextView name,price,itemValue,detail;
     ImageView img;
     int index;
-    static int id=1;
     BottomSheetBehavior bottomSheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +71,7 @@ public class ProductDetails extends AppCompatActivity  {
 
         getWindow().setAttributes(params);
         Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
+//        Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
         //        Transformation transformation = new RoundedTransformationBuilder()
 //                .borderColor(Color.TRANSPARENT)
 //                .borderWidthDp(2)
@@ -102,9 +101,8 @@ public class ProductDetails extends AppCompatActivity  {
         double subTotal=popularProduct.get(index).getPrice();
         long menuId=popularProduct.get(index).getId();
         int quantity=Integer.parseInt(itemValue.getText().toString());
-        long orderNumber=AllData.orderList.get(0).getOrderByDay();
         String name=popularProduct.get(index).getName();
-        CartData temp=new CartData(id,quantity,orderNumber,menuId,subTotal,name);
+        CartData temp=new CartData(quantity,menuId,subTotal,name);
 
         int newQuantity;
         for(int i=0;i<AllData.cartList.size();i++){
@@ -118,6 +116,8 @@ public class ProductDetails extends AppCompatActivity  {
         if(!found){
             AllData.cartList.add(temp);
         }
+
+        finish();
     }
 
     public void closeWindow(View view) {

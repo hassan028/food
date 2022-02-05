@@ -62,6 +62,7 @@ public class Product {
     }
 
     public Product() {
+
     }
 
     public Product(String name, String img, String details, int id, int catId, int orderCount, double price) {

@@ -13,13 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food">
         <activity
-            android:name=".New_Menu_Item_Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Admin_login_Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Starting_Activity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RecieptActivity"
+            android:exported="false" />
+        <activity
+            android:name=".New_Menu_Item_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_login_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Starting_Activity"
+            android:exported="false"/>
         <activity
             android:name=".SearchActivity"
             android:exported="false" />

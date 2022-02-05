@@ -3,18 +3,16 @@ package com.example.food;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Cart extends AppCompatActivity {
     ListView list;
     int rowNumber=-1;
-    TextView tvSubtotal,tvTotalBill;
+    TextView tvSubtotal,tvTotalBill,tvGst;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +20,7 @@ public class Cart extends AppCompatActivity {
         list=findViewById(R.id.list);
         tvSubtotal=findViewById(R.id.tvSubtotal);
         tvTotalBill=findViewById(R.id.tvTotalBill);
+        tvGst= findViewById(R.id.tvGst);
         cartAdaptor();
     }
 
@@ -62,19 +61,27 @@ public class Cart extends AppCompatActivity {
     }
 
     public void cartAdaptor(){
-        double subTotal=0;
+        double subTotal=0,TotalBill;
         int quantity;
-        double price;
+        double price,gst;
+
         for(int i=0;i<AllData.cartList.size();i++){
             quantity=AllData.cartList.get(i).getQuantity();
             price=AllData.cartList.get(i).getSubTotal();
             subTotal=(quantity*price)+subTotal;
         }
         tvSubtotal.setText(subTotal+"");
-        subTotal+=(0.17 * subTotal);
-        tvTotalBill.setText(subTotal+"");
+        gst = 0.17 * subTotal;
+        tvGst.setText(gst+"");
+        TotalBill = subTotal + gst;
+        tvTotalBill.setText(TotalBill+"");
 
-        CartAdaptor cartAdaptor=new CartAdaptor(AllData.cartList,Cart.this);
+        CartAdaptor cartAdaptor=new CartAdaptor(AllData.cartList,Cart.this,0);
         list.setAdapter(cartAdaptor);
+    }
+
+    public void ProceedOrder(View view) {
+        Intent i = new Intent(Cart.this,RecieptActivity.class);
+        startActivity(i);
     }
 }

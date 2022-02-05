@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2.3">
+        android:layout_weight="2.1">
         <Button
 
             android:id="@+id/btnDecrease"
@@ -63,7 +63,6 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:layout_marginLeft="10dp"
             android:textAlignment="center"
             />
 
@@ -71,7 +70,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1.7">
+        android:layout_weight="1.9">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginLeft="10dp"
