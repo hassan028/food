@@ -1,6 +1,7 @@
 package com.example.food;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -35,6 +36,8 @@ public class Cart extends AppCompatActivity {
         quantityView.setText(quantity+"");
 
         cartAdaptor();
+        SharedPreferences myPref = getSharedPreferences("Storage",MODE_PRIVATE);
+        AllData.setSharedPrefrence(myPref);
     }
 
     public void decreaseQuantity(View view) {
@@ -56,8 +59,11 @@ public class Cart extends AppCompatActivity {
             cartAdaptor();
         }
         if(AllData.cartList.size()==0){
+
             finish();
         }
+        SharedPreferences myPref = getSharedPreferences("Storage",MODE_PRIVATE);
+        AllData.setSharedPrefrence(myPref);
     }
 
     public void cartAdaptor(){
@@ -83,5 +89,12 @@ public class Cart extends AppCompatActivity {
     public void ProceedOrder(View view) {
         Intent i = new Intent(Cart.this,RecieptActivity.class);
         startActivity(i);
+    }
+
+    public void emptyCart(View view) {
+        AllData.cartList.clear();
+        SharedPreferences myPref = getSharedPreferences("Storage",MODE_PRIVATE);
+        AllData.setSharedPrefrence(myPref);
+        finish();
     }
 }

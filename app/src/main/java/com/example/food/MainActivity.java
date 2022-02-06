@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.style.DynamicDrawableSpan;
@@ -34,6 +35,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +45,11 @@ public class MainActivity extends AppCompatActivity{
     TabLayout tabLayout;
     ViewPager pager;
     FragmentAdapter adapter;
+    RelativeLayout cartpopup;
 
-
-
+    SharedPreferences myPref;
+    SharedPreferences.OnSharedPreferenceChangeListener listener;
+    TextView tvCartCount,tvSubtotal;
 
     private static final String TAG = "My Tag";
 
@@ -55,6 +59,35 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         initViews();
+
+        cartpopup =findViewById(R.id.cartpopup);
+        tvCartCount = findViewById(R.id.tvCartCount);
+        tvSubtotal = findViewById(R.id.tvSubtotal);
+       /* Gson gson = new Gson();
+        String json = gson.toJson(AllData.cartList);*/
+        SharedPreferences myPref = getSharedPreferences("Storage",MODE_PRIVATE);
+        AllData.setSharedPrefrence(myPref);
+
+        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                if(key.equals("Size")){
+                    int Size = myPref.getInt("Size",0);
+                    Toast.makeText(MainActivity.this, String.valueOf(Size), Toast.LENGTH_SHORT).show();
+                    if(Size == 0){
+                        cartpopup.setVisibility(View.GONE);
+                    }
+                    else{
+                        cartpopup.setVisibility(View.VISIBLE);
+                        tvCartCount.setText(AllData.getTotalCart()+"");
+                        tvSubtotal.setText("Rs. " + AllData.getCartSubtotal());
+                    }
+
+
+                }
+            }
+        };
+        myPref.registerOnSharedPreferenceChangeListener(listener);
+
 
     }
 

@@ -97,4 +97,7 @@ public class SearchActivity extends AppCompatActivity {
         lvProduct.setAdapter(productAdaptor);
     }
 
+    public void back(View view) {
+        super.onBackPressed();
+    }
 }

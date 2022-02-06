@@ -3,6 +3,7 @@ package com.example.food;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -21,12 +22,18 @@ public class ProductDetails extends AppCompatActivity  {
     List<Product> popularProduct;
     TextView name,price,itemValue,detail;
     ImageView img;
+
     int index;
     BottomSheetBehavior bottomSheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
+        float dim_percentage = 75.0f;
+        WindowManager.LayoutParams windowManager = getWindow().getAttributes();
+        windowManager.dimAmount = (dim_percentage / 100);
+       getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
         name=findViewById(R.id.name);
         price=findViewById(R.id.price);
@@ -70,7 +77,7 @@ public class ProductDetails extends AppCompatActivity  {
         params.y=-20;
 
         getWindow().setAttributes(params);
-        Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
+        Picasso.get().load(popularProduct.get(index).getImg()).into(img);
 //        Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
         //        Transformation transformation = new RoundedTransformationBuilder()
 //                .borderColor(Color.TRANSPARENT)
@@ -116,6 +123,9 @@ public class ProductDetails extends AppCompatActivity  {
         if(!found){
             AllData.cartList.add(temp);
         }
+
+        SharedPreferences myPref = getSharedPreferences("Storage",MODE_PRIVATE);
+        AllData.setSharedPrefrence(myPref);
 
         finish();
     }

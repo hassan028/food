@@ -46,21 +46,72 @@
         android:layout_below="@+id/tab_layout"
         android:background="@color/white"
          />
-
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/cart"
-        android:background="@drawable/circle"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:focusable="true"
+    <RelativeLayout
+        android:id="@+id/cartpopup"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:onClick="showCart"
-        />
+        android:background="@color/white"
+        android:visibility="gone"
+        >
 
-     <!--   <TextView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/popup_background"
+            android:focusable="true"
+            android:onClick="showCart">
+
+            <TextView
+                android:id="@+id/tvCartCount"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/circle4"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="View Cart"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvSubtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="Rs. 978.0"
+                android:maxLength="12"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+        </RelativeLayout>
+        </RelativeLayout>
+
+            <!--<ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/cart"
+                android:background="@drawable/circle"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:focusable="true"
+                android:layout_alignParentBottom="true"
+                android:onClick="showCart"
+                />-->
+
+            <!--   <TextView
             android:layout_width="20dp"
             android:layout_height="20dp"
 
@@ -73,5 +124,4 @@
             android:textColor="?themeColor2" />-->
 
 
-
-</RelativeLayout>
+        </RelativeLayout>

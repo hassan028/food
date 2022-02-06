@@ -27,6 +27,7 @@
                 android:background="@color/white"
                 android:paddingLeft="3dp"
                 android:layout_centerVertical="true"
+                android:onClick="back"
                 />
         </RelativeLayout>
         <EditText

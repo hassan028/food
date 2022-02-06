@@ -7,10 +7,10 @@
     android:orientation="vertical"
     android:weightSum="2"
     tools:context=".ProductDetails"
+
     >
     <LinearLayout
         android:id="@+id/sheet"
-        android:background="@drawable/rounded"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -20,21 +20,22 @@
             >
 
             <ImageView
-                android:background="@drawable/popup_background"
                 android:id="@+id/img"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_centerInParent="true" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                 />
             <!--?-->
             <Button
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/close"
-                android:onClick="closeWindow"
-                />
+                android:onClick="closeWindow" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -58,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="hy"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     android:textColor="@color/black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="15dp"
@@ -86,8 +87,8 @@
                         android:text="price"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="22dp" />
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -121,13 +122,13 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:textColor="@color/black"
                 android:layout_marginLeft="15dp"
+                android:background="@null"
                 android:hint="+ Add special instructions"
                 android:textAlignment="textStart"
+                android:textColor="@color/black"
                 android:textColorHint="?themeColor2"
-                android:background="@null"
+                android:textSize="20dp"
 
                 />
         </LinearLayout>
@@ -151,65 +152,71 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"/>
+                    android:layout_weight="0.4"/>
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"
+                    android:layout_weight="3.8"
                     >
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_weight="1.5"
+                        android:layout_weight="1.2"
                         >
                         <Button
                             android:background="@drawable/circle"
-                            android:layout_width="50dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:text="-"
-
                             android:layout_marginBottom="15dp"
                             android:onClick="decrement"
                             android:textColor="@color/white"
                             android:textSize="22dp"
-                            android:layout_height="50dp"/>
+                            />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_weight="1"
-                        >
+                        android:gravity="center">
+
                         <TextView
+                            android:id="@+id/itemValue"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:textSize="22dp"
                             android:layout_marginBottom="15dp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:text="1"
-                            android:id="@+id/itemValue"
                             android:gravity="center"
-                            />
+                            android:text="1"
+                            android:textColor="@color/black"
+                            android:textSize="22dp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_weight="1.5"
+                        android:layout_weight="1.2"
                         >
                         <Button
                             android:background="@drawable/circle"
-                            android:layout_width="50dp"
+                            android:layout_width="40dp"
                             android:text="+"
 
                             android:layout_marginBottom="15dp"
                             android:onClick="increment"
                             android:textColor="@color/white"
                             android:textSize="22dp"
-                            android:layout_height="50dp"/>
+                            android:layout_height="40dp"/>
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -220,13 +227,13 @@
                     <Button
                         android:layout_width="match_parent"
                         android:text="Add To Cart"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="30dp"
                         android:layout_marginRight="20dp"
                         android:onClick="addToCart"
                         android:textColor="@color/white"
                         android:background="@drawable/popup_background"
                         android:layout_marginBottom="15dp"
-                        android:layout_height="60dp"/>
+                        android:layout_height="50dp"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

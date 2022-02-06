@@ -43,12 +43,27 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"/>
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:text="Empty Cart"
+                android:textAllCaps="false"
+                android:textColor="?themeColor2"
+                android:textSize="21sp"
+                android:onClick="emptyCart"
+
+                />
+
+        </RelativeLayout>
         <RelativeLayout
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_weight="2.5">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,6 +173,7 @@
                 android:onClick="ProceedOrder"
                 android:padding="15dp"
                 android:text="Proceed to order"
+                android:textAllCaps="false"
                 android:textColor="@color/black" />
         </RelativeLayout>
 

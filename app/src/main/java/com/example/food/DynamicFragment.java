@@ -1,6 +1,8 @@
 package com.example.food;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,9 +29,10 @@ import java.util.List;
 
 public class DynamicFragment extends Fragment {
     ListView lvProduct;
-    List<Product> popularProductList;
+    List<Product> productList;
     FirebaseDatabase foodDatabase;
     DatabaseReference foodDbRef;
+
     private static final String TAG = "My Tag";
     @Nullable
     @Override
@@ -37,23 +41,27 @@ public class DynamicFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment, null);
         lvProduct = (ListView) root.findViewById(R.id.products);
 
+
         Bundle b = getArguments();
 
-        popularProductList = new ArrayList<>();
+        productList = new ArrayList<>();
 
-        popularProductList = AllData.getCategoryProductList(b.getString("Fragment"));
+        productList = AllData.getCategoryProductList(b.getString("Fragment"));
 
 
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Intent intent = new Intent(getActivity(), ProductDetails.class);
                 intent.putExtra("index", position + "");
                 intent.putExtra("list",b.getString("Fragment"));
+
+
                 startActivity(intent);
             }
         });
 
-        ProductAdaptor productAdaptor=new ProductAdaptor(popularProductList,getActivity());
+        ProductAdaptor productAdaptor=new ProductAdaptor(productList,getActivity());
         lvProduct.setAdapter(productAdaptor);
 
         foodDatabase = FirebaseDatabase.getInstance();
@@ -61,12 +69,12 @@ public class DynamicFragment extends Fragment {
         foodDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                popularProductList = AllData.getCategoryProductList(b.getString("Fragment"));
+                productList = AllData.getCategoryProductList(b.getString("Fragment"));
                 if(getActivity()==null){
                     Log.d(TAG,"onFailure: this is null " );
                 }else {
                     Log.d(TAG,"onFailure:  " + getActivity());
-                    ProductAdaptor productAdaptor = new ProductAdaptor(popularProductList, getActivity());
+                    ProductAdaptor productAdaptor = new ProductAdaptor(productList, getActivity());
                     lvProduct.setAdapter(productAdaptor);
                 }
             }

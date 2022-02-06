@@ -1,6 +1,7 @@
 package com.example.food;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,18 @@ public class AllData extends Application {
             subTotal=(quantity*price)+subTotal;
         }
         return subTotal;
+    }
+    public static int getTotalCart(){
+        int totalCart =0;
+        for(CartData cd : AllData.cartList){
+            totalCart = cd.getQuantity() + totalCart;
+        }
+        return totalCart;
+    }
+    public static void setSharedPrefrence(SharedPreferences myPref){
+        SharedPreferences.Editor myPrefEditor = myPref.edit();
+        myPrefEditor.putInt("Size",AllData.getTotalCart());
+        myPrefEditor.commit();
     }
 
     /*public static List<Product>  getCategoryProductList(String catName) {
