@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class ProductDetails extends AppCompatActivity  {
     List<Product> popularProduct;
     TextView name,price,itemValue,detail;
     ImageView img;
+    EditText specialInstruction;
 
     int index;
     BottomSheetBehavior bottomSheetBehavior;
@@ -40,6 +42,7 @@ public class ProductDetails extends AppCompatActivity  {
         img=findViewById(R.id.img);
         itemValue=findViewById(R.id.itemValue);
         detail=findViewById(R.id.detail);
+        specialInstruction=findViewById(R.id.specialInstruction);
 
         Intent i = getIntent();
         int index=Integer.parseInt(i.getStringExtra("index"));
