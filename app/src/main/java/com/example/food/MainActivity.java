@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity{
         };
         myPref.registerOnSharedPreferenceChangeListener(listener);
 
+        Intent intent=new Intent(MainActivity.this,New_Menu_Item_Activity.class);
+        startActivity(intent);
+
 
     }
 

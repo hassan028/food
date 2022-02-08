@@ -57,9 +57,11 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
         price=findViewById(R.id.price);
 
         //Populating items in spinner
-        String[] items = new String[]{"Burger", "Pizza"};
+        String[] items = new String[]{"Select the Category","Burger", "Pizza"};
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         category.setAdapter(adapter);
+
 
         //Get the selected spinner category
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -80,6 +82,10 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
     }
 
     public void storeInFireBase(View view){
+        if(uri==null || selectedCategory.matches("Select the Category")){
+            return;
+        }
+
         StorageReference storageReference=  reference.child(System.currentTimeMillis()+"."+getFileExtension());
         storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -134,14 +140,17 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
     }
 
     public int getCategoryId(String items[]){
-        int id = 0;
-        for(int i=0;i<items.length;i++){
-            if(items[i].equals(selectedCategory)){
-                id=i+2;
-                break;
+        int id = -1;
+        if(selectedCategory.matches("Select the Category")){
+            Toast.makeText(New_Menu_Item_Activity.this, "Select Category First", Toast.LENGTH_SHORT).show();
+        }else{
+            for(int i=0;i<items.length;i++){
+                if(items[i].equals(selectedCategory)){
+                    id=i+1;
+                    break;
+                }
             }
         }
-        Toast.makeText(New_Menu_Item_Activity.this, id+" category id", Toast.LENGTH_SHORT).show();
         return id;
     }
 
