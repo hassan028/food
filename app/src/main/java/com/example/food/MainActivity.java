@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity{
     public void  initViews(){
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
+        toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
 
@@ -169,8 +170,13 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        finishAffinity();
-        finish();
+        if(AllData.Mode == 2) {
+            finishAffinity();
+            finish();
+        }
+        else{
+            super.onBackPressed();
+        }
     }
 
 

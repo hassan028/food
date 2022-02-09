@@ -27,4 +27,10 @@ public class Starting_Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public  void onBackPressed(){
+        finishAffinity();
+        finish();
+    }
+
 }
