@@ -81,7 +81,7 @@ public class RecieptActivity extends AppCompatActivity {
         for(CartData cart :  AllData.cartList){
             for(Product p : AllData.menuList){
                 if(p.getId() == cart.getMenuId()) {
-                    changeOrderCount(p.getId() + "", (p.getOrderCount() + 1));
+                    changeOrderCount(p.getId() + "", (p.getOrderCount() + cart.getQuantity()));
 
                 }
             }
