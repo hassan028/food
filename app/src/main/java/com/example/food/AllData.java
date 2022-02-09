@@ -14,6 +14,7 @@ public class AllData extends Application {
     static List<Product> menuList;
     static List<Product> filteredList;
     static List<Sales> salesList;
+    static List<Feedback> feedbackList;
     static int Mode;
     public AllData() {
 
@@ -23,6 +24,7 @@ public class AllData extends Application {
         orderList = new ArrayList<>();
         filteredList=new ArrayList<>();
         salesList = new ArrayList<>();
+        feedbackList=new ArrayList<>();
         Mode = 0;
     }
     public static List<Product>  getCategoryProductList(String catName) {

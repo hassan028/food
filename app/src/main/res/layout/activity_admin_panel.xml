@@ -59,6 +59,7 @@
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="22sp"
+                android:onClick="feedback"
                 android:text="Feedback"
                 android:layout_marginTop="20dp"
                 />

@@ -49,6 +49,7 @@ public class SplashActivity extends AppCompatActivity {
         loadFirebaseToList("Category");
         loadFirebaseToList("Order");
         loadFirebaseToList("Sales");
+        loadFirebaseToList("Feedback");
     }
     public void loadFirebaseToList(String table){
 
@@ -63,12 +64,14 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 else if(table.equals("Category")){
                     AllData.categoryList.clear();
-
                 }
                 else if(table.equals("Order")){
                     AllData.orderList.clear();
                 }
                 else if(table.equals("Sales")){
+                    AllData.salesList.clear();
+                }
+                else if(table.equals("Feedback")){
                     AllData.salesList.clear();
                 }
                 for (DataSnapshot snap : snapshot.getChildren()) {
@@ -79,6 +82,10 @@ public class SplashActivity extends AppCompatActivity {
                     else if(table.equals("Category")){
                         Category tempCategory = snap.getValue(Category.class);
                         AllData.categoryList.add(tempCategory);
+                    }
+                    else if(table.equals("Feedback")){
+                        Feedback tempFeedback = snap.getValue(Feedback.class);
+                        AllData.feedbackList.add(tempFeedback);
                     }
                     else if(table.equals("Order")) {
                         Order tempOrder = snapshot.getValue(Order.class);

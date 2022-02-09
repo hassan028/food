@@ -10,8 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?themeColor1"
-        />
+        android:background="?themeColor1" />
     <ImageButton
         android:layout_below="@+id/toolbar"
         android:layout_width="45dp"

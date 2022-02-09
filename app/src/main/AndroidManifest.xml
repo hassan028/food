@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food">
         <activity
+            android:name=".Feedback_activity"
+            android:exported="false" />
+        <activity
             android:name=".ViewItem"
             android:exported="false" />
         <activity

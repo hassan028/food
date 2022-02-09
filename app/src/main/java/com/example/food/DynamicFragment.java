@@ -41,7 +41,6 @@ public class DynamicFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment, null);
         lvProduct = (ListView) root.findViewById(R.id.products);
 
-
         Bundle b = getArguments();
 
         productList = new ArrayList<>();
