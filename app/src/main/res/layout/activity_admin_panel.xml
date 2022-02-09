@@ -33,6 +33,7 @@
                 android:onClick="openItemMenu"
                 />
             <Button
+                android:visibility="gone"
                 android:layout_width="160dp"
                 android:layout_height="45dp"
                 android:background="@drawable/popup_background"
