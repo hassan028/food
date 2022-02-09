@@ -61,8 +61,10 @@ public class RecieptActivity extends AppCompatActivity {
 
         Sales objSales = new Sales(2,orderNumber,TotalBillValue,date,AllData.cartList);
 
+        int SalesId = AllData.salesList.size();
+        SalesId = SalesId + 1;
 
-        mRefSales.child("2").setValue(objSales, new DatabaseReference.CompletionListener() {
+        mRefSales.child(SalesId + "").setValue(objSales, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 if(error == null){

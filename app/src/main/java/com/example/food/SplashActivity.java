@@ -102,7 +102,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     }
                     else if(table.equals("Sales")) {
-                        Sales tempSales = snapshot.getValue(Sales.class);
+                        Sales tempSales = snap.getValue(Sales.class);
                         AllData.salesList.add(tempSales);
 
                     }
