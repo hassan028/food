@@ -23,4 +23,9 @@ public class AdminPanelActivity extends AppCompatActivity {
         Intent intent=new Intent(AdminPanelActivity.this,Feedback_activity.class);
         startActivity(intent);
     }
+
+    public void sales(View view) {
+        Intent intent=new Intent(AdminPanelActivity.this,Sales_activity.class);
+        startActivity(intent);
+    }
 }

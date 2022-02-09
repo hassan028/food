@@ -49,6 +49,7 @@
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="22sp"
+                android:onClick="sales"
                 android:text="Sales"
                 android:layout_marginTop="20dp"
                 />

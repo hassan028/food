@@ -22,11 +22,10 @@ public class Admin_login_Activity extends AppCompatActivity {
         String name=username.getText().toString().trim();
         String pass=password.getText().toString().trim();
 
-        if(name.length()>4 && pass.length()>4){
+        if(name.matches("admin") && pass.matches("1234")){
             AllData.Mode = 1;
             Intent intent=new Intent(Admin_login_Activity.this,AdminPanelActivity.class);
             startActivity(intent);
         }
-
     }
 }
