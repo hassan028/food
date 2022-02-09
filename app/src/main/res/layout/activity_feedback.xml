@@ -29,15 +29,14 @@
         android:id="@+id/addFeedback"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/add"
-        android:background="@drawable/circle"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
-        android:focusable="true"
-        android:layout_alignParentBottom="true"
-        android:onClick="addFeedback"
         android:autofillHints="Add Feedback"
-        />
+        android:background="@drawable/circle"
+        android:focusable="true"
+        android:onClick="addFeedback"
+        android:src="@drawable/add" />
 
 </RelativeLayout>

@@ -72,7 +72,7 @@ public class SplashActivity extends AppCompatActivity {
                     AllData.salesList.clear();
                 }
                 else if(table.equals("Feedback")){
-                    AllData.salesList.clear();
+                    AllData.feedbackList.clear();
                 }
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     if(table.equals("Menu")) {
