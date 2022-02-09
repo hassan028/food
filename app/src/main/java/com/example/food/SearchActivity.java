@@ -1,5 +1,6 @@
 package com.example.food;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -7,10 +8,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +29,8 @@ public class SearchActivity extends AppCompatActivity {
     ListView lvProduct;
     EditText etSeaechBar;
     ProductAdaptor productAdaptor;
+    FirebaseDatabase foodDatabase;
+    DatabaseReference foodDbRef;
 
     List<Product> list;
     int length=0;
@@ -88,6 +99,21 @@ public class SearchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 length=s.toString().trim().length();
                 filter(s.toString().trim());
+            }
+        });
+
+        foodDatabase = FirebaseDatabase.getInstance();
+        foodDbRef = foodDatabase.getReference("Menu");
+        foodDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productAdaptor = new ProductAdaptor(AllData.menuList,SearchActivity.this);
+                lvProduct.setAdapter(productAdaptor);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
