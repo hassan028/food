@@ -47,8 +47,8 @@ public class SalesAdaptor extends BaseAdapter {
         TextView totalBill=v.findViewById(R.id.totalBill);
 
         date.setText(temp.getDate());
-        orderNumber.setText("Rs. "+temp.getOrderNumber());
-        totalBill.setText(temp.getTotalBill()+"");
+        orderNumber.setText(temp.getOrderNumber()+"");
+        totalBill.setText("Rs. "+temp.getTotalBill()+"");
 
         return v;
     }

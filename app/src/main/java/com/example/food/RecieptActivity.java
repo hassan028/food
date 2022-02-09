@@ -22,10 +22,10 @@ import java.util.Date;
 public class RecieptActivity extends AppCompatActivity {
 
     ListView listItemsReciept;
-    TextView subTotal,gst,totalBill;
+    TextView subTotal,gst,totalBill,orderId;
 
     FirebaseDatabase mDatabase;
-    DatabaseReference mRefSales,mRefMenu;
+    DatabaseReference mRefSales,mRefMenu,mRefOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -39,7 +39,9 @@ public class RecieptActivity extends AppCompatActivity {
         subTotal =findViewById(R.id.subTotalReciept);
         gst = findViewById(R.id.gstReciept);
         totalBill =findViewById(R.id.totalBillReciept);
+        orderId = findViewById(R.id.orderId);
 
+        orderId.setText(AllData.orderList.get(0).OrderByDay+"");
         double subtotalValue = AllData.getCartSubtotal();
         subTotal.setText(subtotalValue + "");
 
@@ -76,6 +78,21 @@ public class RecieptActivity extends AppCompatActivity {
             }
         });
 
+
+
+        mRefOrder = mDatabase.getReference().child("Order");
+        mRefOrder.child("orderByDay").setValue((AllData.orderList.get(0).getOrderByDay()+1), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if(error == null){
+                    Toast.makeText(RecieptActivity.this, "Data Saved", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(RecieptActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         mRefMenu = mDatabase.getReference().child("Menu");
 
         for(CartData cart :  AllData.cartList){
@@ -87,6 +104,7 @@ public class RecieptActivity extends AppCompatActivity {
             }
 
         }
+
 
 
     }

@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:id="@+id/heading"
         android:weightSum="1"
-        android:layout_height="50sp">
+        android:layout_height="60dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -31,7 +31,7 @@
             <TextView
                 android:gravity="center_vertical"
                 android:layout_marginLeft="15sp"
-                android:textSize="27sp"
+                android:textSize="25sp"
                 android:id="@+id/date"
                 android:textColor="?themeColor1"
                 android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginLeft="15sp"
                 android:textColor="?themeColor1"
-                android:textSize="27sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Order #"/>
@@ -61,7 +61,7 @@
                 android:id="@+id/totalBill"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="15sp"
-                android:textSize="27sp"
+                android:textSize="25sp"
                 android:textColor="?themeColor1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

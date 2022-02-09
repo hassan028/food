@@ -8,22 +8,16 @@
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/circle.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/close.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/minus.xml" value="0.22552083333333334" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/popup_background.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/drawable/rounded.xml" value="0.1375" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_admin_panel.xml" value="0.209375" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_cart.xml" value="0.18" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_feedback.xml" value="0.209375" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_new_menu_item.xml" value="0.209375" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/activity_product_details.xml" value="0.22" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/cart_row.xml" value="0.18" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/feedback_row.xml" value="0.209375" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/fragment.xml" value="0.1453125" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/fragment_best.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/fragment_popular.xml" value="0.15" />
         <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/oneproduct.xml" value="0.22" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/reciept_row.xml" value="0.209375" />
-        <entry key="..\:/Users/Hassan Javed/AndroidStudioProjects/Food/app/src/main/res/layout/splah_screen.xml" value="0.209375" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/add.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/all_sides_rounded.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/cart.xml" value="0.13072916666666667" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/circle.xml" value="0.13072916666666667" />
@@ -38,14 +32,20 @@
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/oval_rectangle_orange.xml" value="0.196875" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/popup_background.xml" value="0.13125" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/drawable/rounded.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_admin_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_admin_panel.xml" value="0.176" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_cart.xml" value="0.1953125" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_feedback.xml" value="0.16" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_new_menu_item.xml" value="0.264" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_product_details.xml" value="0.2" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_reciept.xml" value="0.176" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_sales.xml" value="0.10833333333333334" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_search.xml" value="0.30425531914893617" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_starting.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/activity_view_item.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/cart_row.xml" value="0.536" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/feedback_row.xml" value="0.16927083333333334" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/fragment.xml" value="0.1953125" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/fragment_best.xml" value="0.1234375" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/fragment_popular.xml" value="0.13958333333333334" />
@@ -53,6 +53,7 @@
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/oneproduct.xml" value="0.2" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/reciept_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/search.xml" value="0.1953125" />
+        <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/spinner_item.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/hp/Documents/usman/Main data/6th Sem/Android Projects/food/app/src/main/res/layout/splah_screen.xml" value="0.165625" />
       </map>
     </option>
