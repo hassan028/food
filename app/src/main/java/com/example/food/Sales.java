@@ -17,6 +17,8 @@ public class Sales {
         Date = date;
         this.cartList = cartList;
     }
+    public Sales(){
+    }
 
     public List<CartData> getCartList() {
         return cartList;

@@ -1,6 +1,7 @@
 package com.example.food;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,31 +15,40 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 public class SplashActivity extends AppCompatActivity {
 
     FirebaseDatabase foodDatabase;
     DatabaseReference foodDbRef;
+    String currentDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splah_screen);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        currentDate = sdf.format(new Date());
+
         loadData();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                Intent i = new Intent(SplashActivity.this,MainActivity.class);
+                Intent i = new Intent(SplashActivity.this,Starting_Activity.class);
                 startActivity(i);
             }
-        }, 6000);
+        }, 5000);
     }
     public void loadData(){
         AllData allData = new AllData();
         loadFirebaseToList("Menu");
         loadFirebaseToList("Category");
         loadFirebaseToList("Order");
+        loadFirebaseToList("Sales");
     }
     public void loadFirebaseToList(String table){
 
@@ -57,6 +67,9 @@ public class SplashActivity extends AppCompatActivity {
                 else if(table.equals("Order")){
                     AllData.orderList.clear();
                 }
+                else if(table.equals("Sales")){
+                    AllData.salesList.clear();
+                }
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     if(table.equals("Menu")) {
                         Product tempProduct = snap.getValue(Product.class);
@@ -68,7 +81,29 @@ public class SplashActivity extends AppCompatActivity {
                     }
                     else if(table.equals("Order")) {
                         Order tempOrder = snapshot.getValue(Order.class);
+                        if(!tempOrder.getCurrentDate().equals(currentDate)){
+                            tempOrder.setCurrentDate(currentDate);
+                            tempOrder.setOrderByDay(0);
+
+                            foodDbRef.setValue(tempOrder, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                    if(error == null){
+                                        Toast.makeText(SplashActivity.this, "Data Saved", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        Toast.makeText(SplashActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
                         AllData.orderList.add(tempOrder);
+
+                    }
+                    else if(table.equals("Sales")) {
+                        Sales tempSales = snapshot.getValue(Sales.class);
+                        AllData.salesList.add(tempSales);
+
                     }
                 }
             }
@@ -78,6 +113,7 @@ public class SplashActivity extends AppCompatActivity {
                 Toast.makeText(SplashActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
+
         });
     }
 }

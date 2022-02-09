@@ -2,6 +2,7 @@ package com.example.food;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ public class AllData extends Application {
     static List<Category> categoryList;
     static List<Product> menuList;
     static List<Product> filteredList;
+    static List<Sales> salesList;
+    static int Mode;
     public AllData() {
 
         cartList=new ArrayList<CartData>();
@@ -19,6 +22,8 @@ public class AllData extends Application {
         menuList = new ArrayList<>();
         orderList = new ArrayList<>();
         filteredList=new ArrayList<>();
+        salesList = new ArrayList<>();
+        Mode = 0;
     }
     public static List<Product>  getCategoryProductList(String catName) {
         List<Product>  categoryProductList = new ArrayList<>();

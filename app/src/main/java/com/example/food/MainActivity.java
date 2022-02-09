@@ -23,6 +23,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity{
     SharedPreferences.OnSharedPreferenceChangeListener listener;
     TextView tvCartCount,tvSubtotal;
 
+    ImageButton btnAdd;
+
     private static final String TAG = "My Tag";
 
     @Override
@@ -60,37 +63,41 @@ public class MainActivity extends AppCompatActivity{
 
         initViews();
 
-        cartpopup =findViewById(R.id.cartpopup);
-        tvCartCount = findViewById(R.id.tvCartCount);
-        tvSubtotal = findViewById(R.id.tvSubtotal);
+        if(AllData.Mode ==2) {
+            cartpopup = findViewById(R.id.cartpopup);
+            tvCartCount = findViewById(R.id.tvCartCount);
+            tvSubtotal = findViewById(R.id.tvSubtotal);
        /* Gson gson = new Gson();
         String json = gson.toJson(AllData.cartList);*/
-        SharedPreferences myPref = getSharedPreferences("Storage",MODE_PRIVATE);
-        AllData.setSharedPrefrence(myPref);
+            SharedPreferences myPref = getSharedPreferences("Storage", MODE_PRIVATE);
+            AllData.setSharedPrefrence(myPref);
 
-        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-                if(key.equals("Size")){
-                    int Size = myPref.getInt("Size",0);
-                    Toast.makeText(MainActivity.this, String.valueOf(Size), Toast.LENGTH_SHORT).show();
-                    if(Size == 0){
-                        cartpopup.setVisibility(View.GONE);
+            listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+                public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                    if (key.equals("Size")) {
+                        int Size = myPref.getInt("Size", 0);
+                        if (Size == 0) {
+                            cartpopup.setVisibility(View.GONE);
+                        } else {
+                            cartpopup.setVisibility(View.VISIBLE);
+                            tvCartCount.setText(AllData.getTotalCart() + "");
+                            tvSubtotal.setText("Rs. " + AllData.getCartSubtotal());
+                        }
+
+
                     }
-                    else{
-                        cartpopup.setVisibility(View.VISIBLE);
-                        tvCartCount.setText(AllData.getTotalCart()+"");
-                        tvSubtotal.setText("Rs. " + AllData.getCartSubtotal());
-                    }
-
-
                 }
-            }
-        };
-        myPref.registerOnSharedPreferenceChangeListener(listener);
+            };
+            myPref.registerOnSharedPreferenceChangeListener(listener);
+        }
+        else if(AllData.Mode == 1){
+            btnAdd = findViewById(R.id.addItem);
+            btnAdd.setVisibility(View.VISIBLE);
+        }
 
-        Intent intent=new Intent(MainActivity.this,New_Menu_Item_Activity.class);
+      /*  Intent intent=new Intent(MainActivity.this,New_Menu_Item_Activity.class);
         startActivity(intent);
-
+*/
 
     }
 
@@ -162,6 +169,10 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    public void addItem(View view) {
+        Intent i = new Intent(MainActivity.this,New_Menu_Item_Activity.class);
+        startActivity(i);
+    }
 }
 
     /*public void popular(View view) {

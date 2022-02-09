@@ -34,17 +34,33 @@ public class SearchActivity extends AppCompatActivity {
 
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(length>0){
-                    Intent intent = new Intent(SearchActivity.this, ProductDetails.class);
-                    intent.putExtra("index", position + "");
-                    intent.putExtra("list","Filter");
-                    startActivity(intent);
-                }else{
-                    Intent intent = new Intent(SearchActivity.this, ProductDetails.class);
-                    intent.putExtra("index", position + "");
-                    intent.putExtra("list","Menu");
-                    startActivity(intent);
+                if(AllData.Mode == 2) {
+                    if (length > 0) {
+                        Intent intent = new Intent(SearchActivity.this, ProductDetails.class);
+                        intent.putExtra("index", position + "");
+                        intent.putExtra("list", "Filter");
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(SearchActivity.this, ProductDetails.class);
+                        intent.putExtra("index", position + "");
+                        intent.putExtra("list", "Menu");
+                        startActivity(intent);
+                    }
                 }
+                else if(AllData.Mode == 1){
+                    if (length > 0) {
+                        Intent intent = new Intent(SearchActivity.this, ViewItem.class);
+                        intent.putExtra("index", position + "");
+                        intent.putExtra("list", "Filter");
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(SearchActivity.this, ViewItem.class);
+                        intent.putExtra("index", position + "");
+                        intent.putExtra("list", "Menu");
+                        startActivity(intent);
+                    }
+                }
+
             }
         });
 

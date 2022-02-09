@@ -48,16 +48,20 @@ public class DynamicFragment extends Fragment {
 
         productList = AllData.getCategoryProductList(b.getString("Fragment"));
 
-
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(getActivity(), ProductDetails.class);
-                intent.putExtra("index", position + "");
-                intent.putExtra("list",b.getString("Fragment"));
-
-
-                startActivity(intent);
+                if(AllData.Mode == 2) {
+                    Intent intent = new Intent(getActivity(), ProductDetails.class);
+                    intent.putExtra("index", position + "");
+                    intent.putExtra("list", b.getString("Fragment"));
+                    startActivity(intent);
+                }
+                else if(AllData.Mode == 1){
+                    Intent intent = new Intent(getActivity(),ViewItem.class);
+                    intent.putExtra("index", position+"");
+                    intent.putExtra("list", b.getString("Fragment"));
+                    startActivity(intent);
+                }
             }
         });
 

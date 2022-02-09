@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Food">
         <activity
+            android:name=".ViewItem"
+            android:exported="false" />
+        <activity
+            android:name=".AdimItemMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminPanelActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -32,7 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".Starting_Activity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SearchActivity"
             android:exported="false" />

@@ -98,18 +98,21 @@
         </RelativeLayout>
         </RelativeLayout>
 
-            <!--<ImageButton
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/addItem"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/cart"
+                android:src="@drawable/add"
                 android:background="@drawable/circle"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="30dp"
                 android:focusable="true"
                 android:layout_alignParentBottom="true"
-                android:onClick="showCart"
-                />-->
+                android:onClick="addItem"
+                android:tag="Add Item"
+                />
 
             <!--   <TextView
             android:layout_width="20dp"

@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Starting_Activity">
+    tools:context=".Starting_Activity"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+    <Button
+        android:id="@+id/guest"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:textSize="22sp"
+        android:background="@drawable/popup_background"
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Admin"
-        android:onClick="proceedToAdmin"
-        android:layout_marginRight="80sp"
-        android:layout_marginLeft="80sp"
-        android:background="?themeColor2"
-        android:layout_centerVertical="true"
-        android:id="@+id/admin"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:text="User"
         android:onClick="proceedToGuest"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="80sp"
-        android:layout_marginLeft="80sp"
-        android:text="Guest"
-        android:background="?themeColor2"
-        android:layout_below="@+id/admin"
+
+        />
+    <Button
+        android:id="@+id/admin"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:background="@drawable/popup_background"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:onClick="proceedToAdmin"
+        android:text="Admin"
+        android:layout_above="@+id/guest"
+        android:textSize="22sp"
+        android:layout_marginTop="20dp"
         />
 
-</RelativeLayout>
+
+</LinearLayout>

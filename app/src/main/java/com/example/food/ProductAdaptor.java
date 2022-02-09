@@ -87,15 +87,17 @@ public class ProductAdaptor extends BaseAdapter {
         details.setText(temp.getDetails());
 
 
+        if(!temp.getImg().trim().equals("")) {
+            Transformation transformation = new RoundedTransformationBuilder()
+                    .borderColor(Color.TRANSPARENT)
+                    .borderWidthDp(2)
+                    .cornerRadiusDp(15)
+                    .oval(false)
+                    .build();
 
-       Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(Color.TRANSPARENT)
-                .borderWidthDp(2)
-                .cornerRadiusDp(15)
-                .oval(false)
-                .build();
-
-        Picasso.get().load(temp.getImg()).transform(transformation).resize(getScreenWidth(),600).into(img);
+//            Picasso.get().load(temp.getImg()).transform(transformation).resize(getScreenWidth(), 600).into(img);
+            Picasso.get().load(temp.getImg()).into(img);
+        }
 
         return v;
     }

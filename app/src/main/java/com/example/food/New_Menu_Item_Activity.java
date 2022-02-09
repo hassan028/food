@@ -31,6 +31,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class New_Menu_Item_Activity extends AppCompatActivity {
     ImageView menuImage;
     Spinner category;
@@ -51,25 +54,35 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
         loadFirebaseToList("Menu");
 
         menuImage=findViewById(R.id.menuImage);
-        category=findViewById(R.id.spinner);
-        name=findViewById(R.id.name);
-        detail=findViewById(R.id.detail);
-        price=findViewById(R.id.price);
+        category=findViewById(R.id.spinnerCategory);
+        name=findViewById(R.id.etName);
+        detail=findViewById(R.id.etDetail);
+        price=findViewById(R.id.etPrice);
+        uri = null;
 
         //Populating items in spinner
-        String[] items = new String[]{"Select the Category","Burger", "Pizza"};
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        List<String> categoryNameList = new ArrayList<>();
+        for(Category objCat : AllData.categoryList){
+            if(objCat.getName().equals("Popular"))
+                continue;
+            categoryNameList.add(objCat.getName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, categoryNameList);
         category.setAdapter(adapter);
-
 
         //Get the selected spinner category
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
-                selectedCategory=category.getSelectedItem().toString();
-                categoryId=getCategoryId(items);
+                selectedCategory = category.getSelectedItem().toString();
+                for(Category objCat : AllData.categoryList){
+                    if(objCat.getName().equals(selectedCategory)){
+                        categoryId = (int) objCat.getId();
+                        break;
+                    }
+                }
                 Toast.makeText(getApplicationContext(), selectedCategory , Toast.LENGTH_SHORT).show();
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -77,42 +90,39 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
             }
         });
 
+
         foodDatabase = FirebaseDatabase.getInstance();
         foodDbRef = foodDatabase.getReference("Menu");
     }
 
-    public void storeInFireBase(View view){
-        if(uri==null || selectedCategory.matches("Select the Category")){
-            return;
-        }
-
-        StorageReference storageReference=  reference.child(System.currentTimeMillis()+"."+getFileExtension());
+    public void storeInFireBase() {
+        if(uri != null){
+        StorageReference storageReference = reference.child(System.currentTimeMillis() + "." + getFileExtension());
         storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        url=uri.toString();
-                        String menuName=name.getText().toString().trim();
-                        String menuDetail=detail.getText().toString().trim();
-                        double menuPrice=Double.parseDouble(price.getText().toString().trim());
+                        url = uri.toString();
+                        String menuName = name.getText().toString().trim();
+                        String menuDetail = detail.getText().toString().trim();
+                        double menuPrice = Double.parseDouble(price.getText().toString().trim());
 
-                        int size=AllData.menuList.size();
+                        int size = AllData.menuList.size();
                         size--;
                         menuId = AllData.menuList.get(size).getId();
                         menuId++;
 
-                        Product p=new Product(menuName,url,menuDetail,menuId,categoryId,0,menuPrice);
+                        Product p = new Product(menuName, url, menuDetail, menuId, categoryId, 0, menuPrice);
 
-                        foodDbRef.child(menuId+"").setValue(p, new DatabaseReference.CompletionListener() {
+                        foodDbRef.child(menuId + "").setValue(p, new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                if(error == null){
+                                if (error == null) {
                                     AllData.menuList.add(p);
                                     Toast.makeText(New_Menu_Item_Activity.this, "Data Saved", Toast.LENGTH_SHORT).show();
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(New_Menu_Item_Activity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -131,6 +141,33 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
                 Toast.makeText(New_Menu_Item_Activity.this, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+        else{
+            String menuName = name.getText().toString().trim();
+            String menuDetail = detail.getText().toString().trim();
+            double menuPrice = Double.parseDouble(price.getText().toString().trim());
+
+            int size = AllData.menuList.size();
+            size--;
+            menuId = AllData.menuList.get(size).getId();
+            menuId++;
+
+            Product p = new Product(menuName, "", menuDetail, menuId, categoryId, 0, menuPrice);
+
+            foodDbRef.child(menuId + "").setValue(p, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                    if (error == null) {
+                        AllData.menuList.add(p);
+                        Toast.makeText(New_Menu_Item_Activity.this, "Data Saved", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(New_Menu_Item_Activity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            Toast.makeText(New_Menu_Item_Activity.this, "Uri is empty ", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public String getFileExtension(){
@@ -139,20 +176,7 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
 
-    public int getCategoryId(String items[]){
-        int id = -1;
-        if(selectedCategory.matches("Select the Category")){
-            Toast.makeText(New_Menu_Item_Activity.this, "Select Category First", Toast.LENGTH_SHORT).show();
-        }else{
-            for(int i=0;i<items.length;i++){
-                if(items[i].equals(selectedCategory)){
-                    id=i+1;
-                    break;
-                }
-            }
-        }
-        return id;
-    }
+
 
     //Methods Used to select Image From Gallery
     public void selectImage(View view) {
@@ -190,5 +214,17 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void submitItem(View view) {
+        if(name.getText().toString().trim().equals("") ){
+            Toast.makeText(New_Menu_Item_Activity.this,"Name should not be empty", Toast.LENGTH_SHORT).show();
+        }
+        else if(price.getText().toString().trim().equals("")){
+            Toast.makeText(New_Menu_Item_Activity.this,"Price should not be empty", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            storeInFireBase();
+        }
     }
 }

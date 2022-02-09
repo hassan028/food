@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetails extends AppCompatActivity  {
-    List<Product> popularProduct;
+    List<Product> productList;
     TextView name,price,itemValue,detail;
     ImageView img;
-    EditText specialInstruction;
+
 
     int index;
     BottomSheetBehavior bottomSheetBehavior;
@@ -42,27 +42,27 @@ public class ProductDetails extends AppCompatActivity  {
         img=findViewById(R.id.img);
         itemValue=findViewById(R.id.itemValue);
         detail=findViewById(R.id.detail);
-        specialInstruction=findViewById(R.id.specialInstruction);
+
 
         Intent i = getIntent();
         int index=Integer.parseInt(i.getStringExtra("index"));
         this.index=index;
 
-        popularProduct=new ArrayList<>();
+        productList=new ArrayList<>();
 
         if(i.getStringExtra("list").equals("Menu")){
-            popularProduct=AllData.menuList;
+            productList=AllData.menuList;
         }else if(i.getStringExtra("list").equals("Filter")){
-            popularProduct=AllData.filteredList;
+            productList=AllData.filteredList;
         }else{
-            popularProduct=AllData.getCategoryProductList(i.getStringExtra("list"));
+            productList=AllData.getCategoryProductList(i.getStringExtra("list"));
         }
 
 
         setSizeOfScreen(index);
-        price.setText("Rs. "+popularProduct.get(index).getPrice()+"");
-        name.setText(popularProduct.get(index).getName());
-        detail.setText(popularProduct.get(index).getDetails());
+        price.setText("Rs. "+productList.get(index).getPrice()+"");
+        name.setText(productList.get(index).getName());
+        detail.setText(productList.get(index).getDetails());
 
 
     }
@@ -80,8 +80,9 @@ public class ProductDetails extends AppCompatActivity  {
         params.y=-20;
 
         getWindow().setAttributes(params);
-        Picasso.get().load(popularProduct.get(index).getImg()).into(img);
-//        Picasso.get().load(popularProduct.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
+        if(!productList.get(index).getImg().trim().equals(""))
+        Picasso.get().load(productList.get(index).getImg()).into(img);
+//        Picasso.get().load(productList.get(index).getImg()).resize((int)(width*0.5),(int)(height*0.2)).into(img);
         //        Transformation transformation = new RoundedTransformationBuilder()
 //                .borderColor(Color.TRANSPARENT)
 //                .borderWidthDp(2)
@@ -108,10 +109,10 @@ public class ProductDetails extends AppCompatActivity  {
 
     public void addToCart(View view) {
         boolean found=false;
-        double subTotal=popularProduct.get(index).getPrice();
-        long menuId=popularProduct.get(index).getId();
+        double subTotal=productList.get(index).getPrice();
+        long menuId=productList.get(index).getId();
         int quantity=Integer.parseInt(itemValue.getText().toString());
-        String name=popularProduct.get(index).getName();
+        String name=productList.get(index).getName();
         CartData temp=new CartData(quantity,menuId,subTotal,name);
 
         int newQuantity;
@@ -138,9 +139,9 @@ public class ProductDetails extends AppCompatActivity  {
     }
 
 
-//        popularProduct= (List<Product>) getIntent().getSerializableExtra("popularProducts");
-//        popularProduct= (List<Product>) i.getSerializableExtra("popularProducts");
-//        name.setText(popularProduct.get(Integer.parseInt(index)).getName());
+//        productList= (List<Product>) getIntent().getSerializableExtra("productLists");
+//        productList= (List<Product>) i.getSerializableExtra("productLists");
+//        name.setText(productList.get(Integer.parseInt(index)).getName());
 //        AllData allData=new AllData();
-//        Toast.makeText(ProductDetails.this, popularProduct.size()+"", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ProductDetails.this, productList.size()+"", Toast.LENGTH_SHORT).show();
 }
