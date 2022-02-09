@@ -119,7 +119,7 @@
                 android:layout_below="@+id/tvSubtotal"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
-                android:maxLength="11"
+                android:maxLength="5"
                 android:text="17%"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"

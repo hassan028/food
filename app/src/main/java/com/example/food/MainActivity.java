@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity{
 
     ImageButton btnAdd;
 
+    FirebaseDatabase foodDatabase;
+    DatabaseReference foodDbRef;
     private static final String TAG = "My Tag";
 
     @Override
@@ -94,6 +96,9 @@ public class MainActivity extends AppCompatActivity{
             btnAdd = findViewById(R.id.addItem);
             btnAdd.setVisibility(View.VISIBLE);
         }
+
+
+
 
       /*  Intent intent=new Intent(MainActivity.this,New_Menu_Item_Activity.class);
         startActivity(intent);

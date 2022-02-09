@@ -54,6 +54,7 @@ public class SplashActivity extends AppCompatActivity {
 
         foodDatabase = FirebaseDatabase.getInstance();
         foodDbRef = foodDatabase.getReference(table);
+        DatabaseReference foodDbRefOrder = foodDatabase.getReference();
         foodDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,7 +86,7 @@ public class SplashActivity extends AppCompatActivity {
                             tempOrder.setCurrentDate(currentDate);
                             tempOrder.setOrderByDay(0);
 
-                            foodDbRef.setValue(tempOrder, new DatabaseReference.CompletionListener() {
+                            foodDbRefOrder.child("Order").setValue(tempOrder, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                     if(error == null){

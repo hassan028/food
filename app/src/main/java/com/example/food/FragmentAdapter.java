@@ -53,6 +53,6 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return AllData.categoryList.size();
     }   // slide count
 }
