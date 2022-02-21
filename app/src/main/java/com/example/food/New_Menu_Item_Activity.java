@@ -158,7 +158,6 @@ public class New_Menu_Item_Activity extends AppCompatActivity {
                 @Override
                 public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                     if (error == null) {
-                        AllData.menuList.add(p);
                         Toast.makeText(New_Menu_Item_Activity.this, "Data Saved", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(New_Menu_Item_Activity.this, error.getMessage(), Toast.LENGTH_SHORT).show();

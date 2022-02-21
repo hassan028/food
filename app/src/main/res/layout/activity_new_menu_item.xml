@@ -129,8 +129,10 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_below="@+id/tvCategory"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="120dp"
+            android:onClick="selectImage" />
 
         <Button
             android:id="@+id/btnChangeImage"

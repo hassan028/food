@@ -36,6 +36,7 @@ public class Cart extends AppCompatActivity {
         quantityView.setText(quantity+"");
 
         cartAdaptor();
+
         SharedPreferences myPref = getSharedPreferences("Storage",MODE_PRIVATE);
         AllData.setSharedPrefrence(myPref);
     }

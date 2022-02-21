@@ -222,7 +222,6 @@ public class ViewItem extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                     if (error == null) {
-                                        AllData.menuList.add(p);
                                         Toast.makeText(ViewItem.this, "Data Saved", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(ViewItem.this, error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -260,7 +259,8 @@ public class ViewItem extends AppCompatActivity {
                 @Override
                 public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                     if (error == null) {
-                        AllData.menuList.add(p);
+
+                        
                         Toast.makeText(ViewItem.this, "Data Saved", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(ViewItem.this, error.getMessage(), Toast.LENGTH_SHORT).show();
